@@ -76,13 +76,6 @@ function say(a, f, cont) {
 	BP.style.left = (cx - x) + "px"
 }
 
-function translate(x, y, size, deg) {
-	return `translate(${
-		centerX - 50 + (x || 0)}px, ${
-		centerY - 50 + (y || 0)}px) rotateZ(${
-		deg || 0}deg) scale(${size || 1})`
-}
-
 function resetZones() {
 	zones.forEach(z => z.style.display = "none")
 	zones.next = 0
@@ -108,7 +101,17 @@ function getZone() {
 	return z
 }
 
+function translate(x, y, size, deg) {
+	return `translate(${
+		centerX - 50 + (x || 0)}px, ${
+		centerY - 50 + (y || 0)}px) rotateZ(${
+		deg || 0}deg) scale(${size || 1})`
+}
+
 function set(e, f, x, y, size, deg) {
+	// Transform origin at runtime to keep sprite coordinates in the
+	// 0-99 range. If the source is centered at 0/0, there are minus
+	// signs that make the values a tiny bit worse to compress.
 	e.style.transformOrigin = `50px 50px`
 	e.style.transform = translate(x, y, size, deg)
 	if (f) {
