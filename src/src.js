@@ -1,5 +1,7 @@
 "use strict"
 
+let centerX, centerY
+
 function clear() {
 	clearTimeout(B.tid)
 	B.time = Date.now()
@@ -74,6 +76,21 @@ function say(a, f, cont) {
 	BP.style.left = (cx - x) + "px"
 }
 
+function translate(x, y, size, deg) {
+	return `translate(${
+		centerX - 50 + (x || 0)}px, ${
+		centerY - 50 + (y || 0)}px) rotateZ(${
+		deg || 0}deg) scale(${size || 1})`
+}
+
+function set(e, f, x, y, size, deg) {
+	e.style.transformOrigin = `50px 50px`
+	e.style.transform = translate(x, y, size, deg)
+	e.onclick = f ? function() {
+		B.talking || f()
+	} : null
+}
+
 function resize() {
 	const windowWidth = window.innerWidth,
 		windowHeight = window.innerHeight,
@@ -82,6 +99,9 @@ function resize() {
 		stageWidth = windowWidth / ratio,
 		stageHeight = windowHeight / ratio
 
+	centerX = stageWidth >> 1
+	centerY = stageHeight >> 1
+
 	const style = S.style
 	style.width = stageWidth + "px"
 	style.height = stageHeight + "px"
@@ -89,7 +109,10 @@ function resize() {
 	style.transform = `scale(${ratio})`
 	style.display = "block"
 
-	say([Guy, "Hello World!"])
+	set(World)
+	set(Guy, function() {
+		say([Guy, "Hello World!"])
+	})
 }
 
 window.onload = function() {
