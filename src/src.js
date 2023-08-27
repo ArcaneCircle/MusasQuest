@@ -1,6 +1,6 @@
 "use strict"
 
-let centerX, centerY
+let centerX, centerY, zones = []
 
 function clear() {
 	clearTimeout(B.tid)
@@ -83,12 +83,40 @@ function translate(x, y, size, deg) {
 		deg || 0}deg) scale(${size || 1})`
 }
 
+function resetZones() {
+	zones.forEach(z => z.style.display = "none")
+	zones.next = 0
+}
+
+function newZone() {
+	const z = document.createElementNS("http://www.w3.org/2000/svg","circle")
+	z.setAttributeNS(null, "cx", 50)
+	z.setAttributeNS(null, "cy", 50)
+	z.setAttributeNS(null, "r", 10)
+	z.setAttributeNS(null, "fill", "rgba(0, 0, 0, .1)")
+	return z
+}
+
+function getZone() {
+	const next = zones.next++
+	if (zones.length > next) {
+		return zones[next]
+	}
+	const z = newZone()
+	S.appendChild(z)
+	zones.push(z)
+	return z
+}
+
 function set(e, f, x, y, size, deg) {
 	e.style.transformOrigin = `50px 50px`
 	e.style.transform = translate(x, y, size, deg)
-	e.onclick = f ? function() {
-		B.talking || f()
-	} : null
+	if (f) {
+		const z = getZone()
+		z.style.transform = e.style.transform
+		z.style.display = "block"
+		z.onclick = function() { B.talking || f() }
+	}
 }
 
 function resize() {
@@ -109,10 +137,14 @@ function resize() {
 	style.transform = `scale(${ratio})`
 	style.display = "block"
 
+	resetZones()
 	set(World)
 	set(Guy, function() {
 		say([Guy, "Hello World!"])
 	})
+	set(Dude, function() {
+		say([Dude, "Hi!"])
+	}, 20, 20)
 }
 
 window.onload = function() {
