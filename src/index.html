@@ -1,16 +1,57 @@
 <!doctype html>
 <html>
 <head>
+<meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, user-scalable=0"/>
+<title>js13k2023</title>
 <style>
-html, body {
-	margin: 0; padding: 0;
+html {
 	background: #000;
+}
+body {
+	margin: 0; padding: 0;
+	font: min(3vw, 3vh) sans-serif; color: #fff;
+	line-height: 150%;
 	overflow: hidden;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-ms-touch-action: none;
+	user-select: none;
+}
+svg {
+	display: none;
+}
+#B {
+	position: fixed;
+	padding: .25em .5em;
+	max-width: 90vw;
+	background: #fff; color: #111;
+	border-radius: .25em;
+	display: none;
+}
+#BP {
+	position: absolute;
+	left: calc(50% - .5em); bottom: -.9em;
+	width: 0; height: 0;
+	border-right: 1em solid transparent;
+	border-top: 1em solid #fff;
 }
 </style>
 </head>
 <body>
+<svg id="S">
+<g id="World">
+	<rect x="0" y="0" width="300" height="300" style="fill: rgb(220, 220, 220);"></rect>
+</g>
+<g id="Guy">
+	<circle style="fill: rgb(16, 16, 16);" cx="150" cy="150" r="5"></circle>
+</g>
+</svg>
+<div id="B"><div id="BM"></div><div id="BP"></div></div>
 </body>
 <script src="src.js"></script>
 </html>
