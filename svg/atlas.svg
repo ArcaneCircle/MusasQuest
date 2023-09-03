@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" style="fill: rgb(59, 127, 255);" y="-220"/>
+<rect width="100" height="70" style="fill: rgb(186, 139, 64);" y="-190"/>
+<path style="fill: rgb(108, 74, 23);" d="M 22 -185 L 62 -189 L 73 -189 L 73 -193 L 22 -192 L 22 -185 Z"/>
+<path style="fill: rgb(167, 124, 56);" d="M 0 -163 L 38 -179 L 87 -175 L 100 -160 L 100 -144 L 0 -129 L 0 -163 Z"/>
+<path d="M 33 -170 L 67 -170 L 69 -166 L 31 -166 L 33 -170 Z" style="fill: rgb(108, 74, 23);"/>
+<path d="M 3 -208 L 7 -209 L 14 -208 L 28 -182 L 9 -179 L 0 -180 L 0 -202 L 3 -208 Z" style="fill: rgb(107, 74, 23);"/>
+<path d="M 9 -179 L 7 -209 L 14 -208 L 28 -182 L 9 -179 Z" style="fill: rgb(150, 110, 43);"/>
+<path d="M 35 -179 L 65 -179 L 67 -176 L 33 -176 L 35 -179 Z" style="fill: rgb(151, 6, 6);"/>
+<path d="M 33 -176 L 67 -176 L 66 -168 L 34 -168 L 33 -176 Z" style="fill: rgb(151, 111, 42);"/>
+<rect x="31" y="164" width="38" height="2" style="fill: rgb(152, 112, 42);" transform="matrix(1, 0, 0, -1, 0, 0)"/>
+<path d="M 35 -184 C 35 -185 65 -186 65 -184 C 66 -184 68 -180 66 -179 L 34 -179 C 32 -180 34 -184 35 -184 Z" style="fill: rgb(176, 9, 9);"/>
+<ellipse style="fill: rgb(199, 9, 8);" cx="33" rx="2" ry="4" cy="-179"/>
+<ellipse style="fill: rgb(199, 9, 8);" cx="67" rx="2" ry="4" cy="-179"/>
+<path style="fill: rgb(223, 210, 179);" d="M 51 -194 L 49 -196 L 44 -194 L 42 -184 L 47 -182 L 40 -181 C 38 -181 38 -178 41 -177 L 48 -175 L 51 -177 L 54 -175 L 61 -177 C 64 -178 64 -181 62 -181 L 55 -182 L 60 -184 L 58 -194 L 53 -196 L 51 -194 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 48 -200 L 46 -204 C 46 -212 56 -212 56 -204 L 54 -200 L 48 -200 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 49 -199 L 49 -196 L 51 -193 L 53 -196 L 53 -199 L 49 -199 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 53 -178 L 49 -177 C 49 -177 48 -174 48 -174 L 51 -176 L 54 -176 L 53 -178 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 49 -178 L 53 -176 L 52 -171 L 50 -175 L 48 -176 L 49 -178 Z"/>
+<path style="fill: rgb(224, 209, 179);" d="M 72 -196 L 74 -202 L 77 -196 L 81 -196 L 83 -200 L 85 -196 L 93 -196 L 95 -200 L 97 -196 L 100 -196 L 100 -186 L 69 -188 L 72 -196 Z"/>
+<path style="fill: rgb(224, 209, 179);" d="M 59 -249 C 59 -249 61 -255 61 -255 L 64 -249 L 68 -249 C 68 -249 70 -253 70 -253 L 72 -249 L 80 -249 C 80 -249 82 -253 82 -253 L 84 -249 L 88 -249 L 91 -254 L 93 -248 L 95 -241 L 71 -240 L 56 -242 L 59 -249 Z"/>
+<path style="fill: rgb(111, 75, 22);" d="M 48 -199 L 47 -204 C 47 -206 55 -206 55 -204 L 54 -199 L 48 -199 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 48 -199 L 51 -195 L 54 -199 C 54 -200 48 -200 48 -199 Z"/>
+<path d="M 22 -268 L 26 -269 L 33 -268 L 47 -242 L 28 -239 L 8 -242 L 22 -268 Z" style="fill: rgb(107, 74, 23);"/>
+<path d="M 28 -239 L 26 -269 L 33 -268 L 47 -242 L 28 -239 Z" style="fill: rgb(150, 110, 43);"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 33 -263 L 37 -264"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 28 -263 L 32 -264"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 28 -263 L 32 -264"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 36 -259 L 40 -260"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 30 -249 L 34 -250"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 38 -254 L 42 -255"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 29 -254 L 33 -255"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 40 -249 L 44 -250"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 35 -249 L 39 -250"/>
+<path style="fill: rgb(216, 216, 216); stroke: rgb(72, 49, 14);" d="M 29 -259 L 33 -260"/>
+<path style="fill: rgb(248, 226, 30);" d="M 46 -204 L 45 -211 L 48 -208 L 51 -213 L 54 -208 L 57 -211 L 56 -204 C 56 -207 46 -207 46 -204 Z"/>
+<path style="fill: rgb(112, 76, 22);" d="M 42 -184 L 48 -180 L 52 -179 L 52 -180 L 51 -180 L 51 -181 L 49 -181 L 45 -185 L 42 -184 Z"/>
+<rect width="100" height="100" style="fill: rgb(59, 127, 255);" y="330"/>
+<path d="M 0 377 C 38 371 57 383 100 381 L 100 430 L 0 430 L 0 377 Z" style="fill: rgb(185, 139, 64);"/>
+<path d="M 0 408 C 36 416 57 390 100 396 L 100 430 L 0 430 L 0 408 Z" style="fill: rgb(167, 125, 56);"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);" y="-110"/>
+<path d="M 17 -23 L 83 -23 L 87 -17 L 13 -17 L 17 -23 Z" style="fill: rgb(108, 74, 23);"/>
+<path d="M 21 -41 L 79 -41 L 83 -35 L 17 -35 L 21 -41 Z" style="fill: rgb(151, 6, 6);"/>
+<path d="M 17 -35 L 83 -35 L 81 -20 L 19 -20 L 17 -35 Z" style="fill: rgb(151, 111, 42);"/>
+<rect x="13" y="13" width="74" height="4" style="fill: rgb(152, 112, 42);" transform="matrix(1, 0, 0, -1, 0, 0)"/>
+<path d="M 21 -50 C 21 -52 79 -54 79 -50 C 81 -50 85 -43 81 -41 L 19 -41 C 15 -43 19 -50 21 -50 Z" style="fill: rgb(176, 9, 9);"/>
+<ellipse style="fill: rgb(199, 9, 8);" cx="17" rx="4" ry="8" cy="-41"/>
+<ellipse style="fill: rgb(199, 9, 8);" cx="83" rx="4" ry="8" cy="-41"/>
+<path style="fill: rgb(223, 210, 179);" d="M 52 -70 L 48 -74 L 38 -70 L 34 -50 L 42 -45 L 31 -44 C 27 -44 27 -39 33 -37 L 46 -33 L 52 -37 L 58 -33 L 71 -37 C 77 -39 77 -44 73 -44 L 64 -45 L 69 -57 L 75 -62 L 65 -71 L 56 -74 L 52 -70 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 46 -81 L 42 -89 C 42 -105 62 -105 62 -89 L 58 -81 L 46 -81 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 48 -79 L 48 -74 L 52 -68 L 56 -74 L 56 -79 L 48 -79 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 56 -39 L 48 -37 C 48 -37 46 -30 46 -30 L 52 -35 L 58 -34 L 56 -39 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 47 -39 L 56 -35 L 54 -25 L 50 -33 L 46 -34 L 47 -39 Z"/>
+<path style="fill: rgb(111, 75, 22);" d="M 46 -79 L 45 -89 C 45 -93 59 -93 59 -89 L 58 -79 L 46 -79 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 46 -79 L 52 -72 L 58 -79 C 58 -83 46 -83 46 -79 Z"/>
+<path style="fill: rgb(248, 226, 30);" d="M 42 -89 L 40 -103 L 46 -97 L 52 -107 L 58 -97 L 64 -103 L 62 -89 C 62 -95 42 -95 42 -89 Z"/>
+<path style="fill: rgb(112, 76, 22);" d="M 34 -50 L 45 -43 L 54 -41 L 54 -43 L 52 -43 L 52 -44 L 48 -44 L 40 -52 L 34 -50 Z"/>
+<path style="fill: rgb(113, 77, 21);" d="M 75 -62 L 70 -47 L 70 -41 L 67 -40 L 66 -44 L 64 -45 L 67 -47 L 69 -57 L 75 -62 Z"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="220" y="-220"/>
+<path style="fill: rgb(49, 34, 10);" d="M 247 -178 L 256 -176 L 267 -179 L 261 -175 L 267 -174 L 280 -178 L 271 -173 L 275 -172 L 290 -174 L 280 -170 L 287 -165 L 302 -167 L 304 -150 C 304 -150 296 -160 296 -161 C 296 -162 285 -161 285 -161 L 280 -156 L 284 -147 L 297 -146 L 279 -141 L 276 -154 L 269 -159 L 260 -145 L 264 -162 L 261 -164 L 253 -151 L 257 -166 L 253 -169 L 245 -159 L 250 -171 L 241 -177 L 239 -191 L 256 -202 L 280 -186 L 253 -191 L 245 -188 L 247 -178 Z"/>
+<rect width="100" height="100" style="fill: rgb(59, 127, 255);" x="110" y="-220"/>
+<path style="fill: rgb(151, 7, 5); transform-origin: 159.002px -155.34px;" d="M 123 -166 C 137 -182 161 -161 189 -169 C 194 -171 202 -152 198 -150 C 161 -140 148 -163 127 -145 C 123 -145 120 -163 123 -166 Z"/>
+<rect width="100" height="100" style="fill: rgb(15, 32, 65);" x="220" y="-330"/>
+<path d="M 220 -263 C 258 -269 277 -257 320 -259 L 320 -230 L 220 -230 L 220 -263 Z" style="fill: rgb(118, 89, 39);"/>
+<circle style="fill: rgb(255, 255, 255);" cx="275" cy="-301" r="1"/>
+<circle style="fill: rgb(255, 255, 255);" cx="305" cy="-321" r="1"/>
+<circle style="fill: rgb(255, 255, 255);" cx="235" cy="-311" r="1"/>
+<circle style="fill: rgb(255, 255, 255);" cx="255" cy="-321" r="1"/>
+<circle style="fill: rgb(255, 255, 255);" cx="294" cy="-311" r="1"/>
+<path style="fill: rgb(112, 76, 22); transform-origin: 55px -182px;" d="M 60 -184 L 54 -180 L 50 -179 L 50 -180 L 51 -180 L 51 -181 L 53 -181 L 57 -185 L 60 -184 Z"/>
+<path style="transform-origin: 159.104px -155.572px; fill: rgb(199, 9, 8);" d="M 124 -166 C 137 -181 162 -161 188 -168 C 193 -170 200 -152 196 -151 C 162 -141 147 -164 127 -147 C 124 -147 121 -164 124 -166 Z"/>
+<circle style="fill: rgb(248, 227, 28);" cx="76" cy="337" r="3"/>
+<rect width="100" height="100" style="fill: rgb(59, 127, 255);" y="220"/>
+<rect width="100" height="70" style="fill: rgb(186, 139, 64);" y="250"/>
+<path style="fill: rgb(109, 74, 23);" d="M 0 269 L 58 264 L 100 268 L 100 246 L 58 247 L 0 244 L 0 269 Z"/>
+<path style="fill: rgb(208, 180, 116);" d="M 58 281 L 58 256 L 105 256 L 105 281 C 105 286 58 287 58 281 Z"/>
+<path style="fill: rgb(223, 210, 179);" d="M 82 240 L 58 256 L 105 256 L 82 240 Z"/>
+<path style="fill: rgb(167, 125, 56);" d="M 68 285 L 68 260 L 82 260 L 82 286 L 68 285 Z"/>
+<path style="fill: rgb(208, 180, 116);" d="M -9 277 L -9 255 L 32 255 L 32 277 C 32 281 -9 282 -9 277 Z"/>
+<path style="fill: rgb(223, 210, 179);" d="M 12 240 L -9 255 L 32 255 L 12 240 Z"/>
+<path style="fill: rgb(167, 125, 56);" d="M 12 281 L 12 258 L 22 258 L 22 280 L 12 281 Z"/>
+<rect width="100" height="100" style="fill: rgb(59, 127, 255);" y="110"/>
+<rect width="100" height="70" style="fill: rgb(186, 139, 64);" y="140"/>
+<path style="fill: rgb(108, 74, 23);" d="M 22 145 L 62 141 L 73 141 L 73 137 L 22 138 L 22 145 Z"/>
+<path d="M 28 155 L 72 152 L 94 174 L 6 177 L 28 155 Z" style="fill: rgb(167, 125, 56);"/>
+<path d="M 3 122 L 7 121 L 14 122 L 28 148 L 9 151 L -11 148 L 3 122 Z" style="fill: rgb(107, 74, 23);"/>
+<path d="M 9 151 L 7 121 L 14 122 L 28 148 L 9 151 Z" style="fill: rgb(150, 110, 43);"/>
+<path style="fill: rgb(224, 209, 179);" d="M 72 134 C 72 134 74 128 74 128 L 77 134 L 81 134 C 81 134 83 130 83 130 L 85 134 L 93 134 C 93 134 95 130 95 130 L 97 134 L 101 134 L 104 129 L 106 135 L 108 143 L 100 144 L 69 142 L 72 134 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 69 285 L 69 261 L 81 261 L 81 286 L 69 285 Z"/>
+<path style="fill: rgb(111, 75, 22);" d="M 13 281 L 13 259 L 21 259 L 21 280 L 13 281 Z"/>
+<path style="fill: rgb(168, 126, 56);" d="M 13 281 L 33 295 L -6 313 C -6 313 -1 325 -1 325 L 50 308 L 98 331 L 121 314 L 74 297 L 81 286 L 69 285 L 49 290 L 21 280 L 13 281 Z"/>
+<circle style="fill: rgb(248, 227, 28);" cx="76" cy="227" r="3"/>
+<path style="fill: rgb(255, 255, 255);" d="M 53 233 L 90 234 C 102 234 83 222 71 230 C 61 220 42 233 53 233 Z"/>
+<path style="fill: rgb(255, 255, 255); transform-origin: 25.415px 229.74px;" d="M 40 233 L 10 233 C 0 233 19 220 29 229 C 36 218 49 233 40 233 Z"/>
+<path style="fill: rgb(168, 126, 56);" d="M 36 277 L 34 252 L 37 253 L 38 277 L 36 277 Z"/>
+<path style="fill: rgb(168, 126, 56);" d="M 53 280 L 54 256 L 56 255 L 55 280 L 53 280 Z"/>
+<path style="fill: rgb(223, 210, 179);" d="M 57 255 C 57 260 33 255 33 252 L 40 250 L 50 251 L 57 255 Z"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);"/>
+<path d="M 17 87 L 83 87 L 87 93 L 13 93 L 17 87 Z" style="fill: rgb(108, 74, 23);"/>
+<path d="M 21 69 L 79 69 L 83 75 L 17 75 L 21 69 Z" style="fill: rgb(151, 6, 6);"/>
+<path d="M 17 75 L 83 75 L 81 90 L 19 90 L 17 75 Z" style="fill: rgb(151, 111, 42);"/>
+<path d="M 14 97 L 86 97 L 87 93 L 13 93 L 14 97 Z" style="fill: rgb(152, 112, 42);"/>
+<path d="M 21 60 C 25 59 75 59 79 60 C 81 63 81 69 81 69 L 19 69 C 19 69 19 63 21 60 Z" style="fill: rgb(176, 9, 9);"/>
+<ellipse style="fill: rgb(199, 9, 8);" cx="17" rx="4" ry="8" cy="69"/>
+<ellipse style="fill: rgb(199, 9, 8);" cx="83" rx="4" ry="8" cy="69"/>
+<path style="fill: rgb(223, 210, 179);" d="M 50 40 L 46 36 L 36 40 L 32 60 L 40 63 L 29 66 C 25 66 25 71 31 73 L 44 77 L 50 73 L 56 77 L 69 73 C 75 71 75 66 71 66 L 61 63 L 69 60 L 63 39 L 54 36 L 50 40 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 44 29 L 40 21 C 40 5 60 5 60 21 L 56 29 L 44 29 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 46 31 L 46 36 L 50 42 L 54 36 L 54 31 L 46 31 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 54 71 L 46 73 C 46 73 44 80 44 80 L 50 75 L 56 76 L 54 71 Z"/>
+<path style="fill: rgb(110, 74, 23);" d="M 45 71 L 54 75 L 52 85 L 48 77 L 44 76 L 45 71 Z"/>
+<path style="fill: rgb(111, 75, 22);" d="M 44 31 L 43 21 C 43 17 57 17 57 21 L 56 31 L 44 31 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 44 31 L 50 38 L 56 31 C 56 27 44 27 44 31 Z"/>
+<path style="fill: rgb(248, 226, 30);" d="M 40 21 L 38 7 L 44 13 L 50 3 L 56 13 L 62 7 L 60 21 C 60 15 40 15 40 21 Z"/>
+<path style="fill: rgb(112, 76, 22);" d="M 32 60 L 43 67 L 52 69 L 52 67 L 50 67 L 50 66 L 46 66 L 38 58 L 32 60 Z"/>
+<path style="fill: rgb(112, 76, 22); transform-origin: 59px 63.5px;" d="M 69 60 L 58 67 L 49 69 L 49 67 L 51 67 L 51 66 L 55 66 L 63 58 L 69 60 Z"/>
+</svg>
