@@ -194,6 +194,7 @@ function set(e, f, x, y, size, deg, hover) {
 function show(name) {
 	info()
 	clear()
+	resetZones()
 	for (const e of S.getElementsByTagName("g")) {
 		e.style.visibility = "hidden"
 		e.onclick = null
@@ -220,7 +221,6 @@ function resize() {
 	style.transform = `scale(${ratio})`
 	style.display = "block"
 
-	resetZones()
 	show(state.scene)
 }
 
