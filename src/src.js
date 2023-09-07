@@ -1,5 +1,36 @@
 "use strict"
 
+const state = {
+	scene: "Throne",
+}, scenes = {
+	Throne: function() {
+		set(Throne)
+		set(King, function() {
+			say([MusaBack, [
+				{
+					text: () => "What quest, father?",
+					action: () => say([King, "Well…"])
+				},
+				{
+					text: () => "Excuse me, I've got to go.",
+					action: () => show("Market")
+				},
+			]])
+		}, 0, -20, .4)
+		set(MusaBack, function() {
+		}, 25, 22, .5)
+		say([
+			King, "Hello my son!",
+			King, "I have a quest for you.",
+		])
+	},
+	Market: function() {
+		set(Market)
+		set(Musa, function() {}, 31, 20, .55)
+		set(Seer, function() {}, -37, 12, .5)
+	}
+}
+
 let centerX, centerY, hasTouch, zones = []
 
 function clear() {
@@ -134,6 +165,16 @@ function set(e, f, x, y, size, deg) {
 	}
 }
 
+function show(name) {
+	clear()
+	for (const e of S.getElementsByTagName("g")) {
+		e.style.visibility = "hidden"
+		e.onclick = null
+	}
+	state.scene = name
+	scenes[name]()
+}
+
 function resize() {
 	const windowWidth = window.innerWidth,
 		windowHeight = window.innerHeight,
@@ -153,30 +194,10 @@ function resize() {
 	style.display = "block"
 
 	resetZones()
-
-	set(Throne)
-	set(King, function() {
-		say([King, "I've sent to see you."])
-	}, 0, -12, .4)
-	set(MusaBack, function() {
-		say([MusaBack, [
-			{
-				text: () => "Hello father.",
-				action: () => say([King, "Check"])
-			},
-			{
-				text: () => "Hi!",
-				action: () => say([King, "Roger"])
-			},
-		]])
-	}, 22, 22, .5)
-	say([King, "Hello my son!"])
+	show(state.scene)
 }
 
 window.onload = function() {
-	for (const e of S.getElementsByTagName("g")) {
-		e.style.visibility = "hidden"
-	}
 	document.onclick = skip
 	document.onkeyup = skip
 	// Prevent pinch/zoom on iOS 11.
