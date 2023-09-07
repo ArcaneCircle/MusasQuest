@@ -98,9 +98,10 @@ function say(a, f, cont) {
 		ww = window.innerWidth,
 		center = ((whoRect.x || whoRect.left) + whoRectHalfWidth) | 0
 	let x = center - bubbleRectHalfWidth
-	if (x + bubbleRect.width >= ww) {
-		x = Math.min(ww - bubbleRect.width - margin,
-			Math.max(margin, x + whoRectHalfWidth - bubbleRectHalfWidth))
+	if (x < 0) {
+		x = margin
+	} else if (x + margin + bubbleRect.width >= ww) {
+		x = ww - margin - bubbleRect.width
 	}
 	B.style.left = x + "px"
 	B.style.top = ((whoRect.y || whoRect.top) -
