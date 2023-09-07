@@ -60,20 +60,21 @@ function say(a, f, cont) {
 		B.tid = setTimeout(B.next, 1000 + 200 * what.split(' ').length)
 	}
 	const whoRect = who.getBoundingClientRect(),
+		whoRectHalfWidth = whoRect.width / 2 | 0,
 		bubbleRect = B.getBoundingClientRect(),
-		margin = parseFloat(getComputedStyle(B).fontSize),
-		whoRectHalfWidth = whoRect.width / 2,
-		ww = window.innerWidth
-	let x = whoRect.x || whoRect.left,
-		cx = x + whoRectHalfWidth
+		bubbleRectHalfWidth = bubbleRect.width / 2 | 0,
+		margin = parseFloat(getComputedStyle(B).fontSize) | 0,
+		ww = window.innerWidth,
+		center = ((whoRect.x || whoRect.left) + whoRectHalfWidth) | 0
+	let x = center - bubbleRectHalfWidth
 	if (x + bubbleRect.width >= ww) {
 		x = Math.min(ww - bubbleRect.width - margin,
-			Math.max(margin, x + whoRectHalfWidth - bubbleRect.width / 2))
+			Math.max(margin, x + whoRectHalfWidth - bubbleRectHalfWidth))
 	}
 	B.style.left = x + "px"
 	B.style.top = ((whoRect.y || whoRect.top) -
 		bubbleRect.height - margin * 1.5) + "px"
-	BP.style.left = (cx - x) + "px"
+	BP.style.left = (center - margin / 2 - x) + "px"
 }
 
 function resetZones() {
@@ -150,7 +151,16 @@ function resize() {
 		say([King, "I've sent to see you."])
 	}, 0, -12, .4)
 	set(MusaBack, function() {
-		say([MusaBack, "Hello father."])
+		say([MusaBack, [
+			{
+				text: () => "Hello father.",
+				action: () => say([King, "Check"])
+			},
+			{
+				text: () => "Hi!",
+				action: () => say([King, "Roger"])
+			},
+		]])
 	}, 22, 22, .5)
 	say([King, "Hello my son!"])
 }
