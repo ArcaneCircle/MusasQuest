@@ -16,7 +16,7 @@ const state = {
 					action: () => show("Market")
 				},
 			]])
-		}, 0, -20, .4, 0, "The king")
+		}, 0, -10, .4, 0, "Talk to the king")
 		set(MusaBack, function() {
 		}, 25, 22, .5, 0, "Me")
 		say([
@@ -26,8 +26,8 @@ const state = {
 	},
 	Market: function() {
 		set(Market)
-		set(Musa, function() {}, 31, 20, .55, 0, "Still me")
-		set(Seer, function() {}, -37, 12, .5, 0, "The seer")
+		set(Musa, function() {}, 31, 20, .55, 0)
+		set(Seer, function() {}, -37, 12, .5, 0, "Talk to the seer")
 	}
 }
 
@@ -118,7 +118,7 @@ function newZone() {
 	z.setAttributeNS(null, "cx", 50)
 	z.setAttributeNS(null, "cy", 50)
 	z.setAttributeNS(null, "r", 10)
-	z.setAttributeNS(null, "fill", "rgba(0, 0, 0, 0)")
+	z.setAttributeNS(null, "fill", "rgba(0,0,0,0)")
 	return z
 }
 
