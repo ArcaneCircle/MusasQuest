@@ -140,13 +140,8 @@ function translate(x, y, size, deg) {
 		deg || 0}deg) scale(${size || 1})`
 }
 
-function hideInfo() {
-	Info.style.display = "none"
-}
-
-function showInfo(m) {
-	Info.innerHTML = m
-	Info.style.display = "block"
+function info(m) {
+	Info.innerHTML = typeof m == "string" ? m : "&nbsp;"
 }
 
 function setHotspot(e, m) {
@@ -158,7 +153,7 @@ function setHotspot(e, m) {
 		}
 	} else {
 		e.onmousemove = function(event) {
-			showInfo(m)
+			info(m)
 			event.stopPropagation()
 		}
 	}
@@ -188,12 +183,15 @@ function set(e, f, x, y, size, deg, hover) {
 			z.style.transform = e.style.transform
 			z.style.display = "block"
 			z.onclick = onclick
+			if (hover) {
+				z.hoverMessage = hover
+			}
 		}
 	}
 }
 
 function show(name) {
-	hideInfo()
+	info()
 	clear()
 	for (const e of S.getElementsByTagName("g")) {
 		e.style.visibility = "hidden"
@@ -244,16 +242,12 @@ window.onload = function() {
 			if (touches && touches.length > 0) {
 				const t = touches[0],
 					e = document.elementFromPoint(t.pageX, t.pageY)
-				if (e && e.hoverMessage) {
-					showInfo(e.hoverMessage)
-				} else {
-					hideInfo()
-				}
+				info(e && e.hoverMessage ? e.hoverMessage : null)
 			}
 		}
-		document.ontouchend = document.ontouchcancel = hideInfo
+		document.ontouchend = document.ontouchcancel = info
 	} else {
-		document.onmousemove = hideInfo
+		document.onmousemove = info
 	}
 	window.onresize = resize
 	resize()
