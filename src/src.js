@@ -86,7 +86,8 @@ function newZone() {
 	z.setAttributeNS(null, "cx", 50)
 	z.setAttributeNS(null, "cy", 50)
 	z.setAttributeNS(null, "r", 10)
-	z.setAttributeNS(null, "fill", "rgba(0, 0, 0, .1)")
+	//z.setAttributeNS(null, "fill", "rgba(0, 0, 0, .1)")
+	z.setAttributeNS(null, "fill", "rgba(0, 0, 0, 0)")
 	return z
 }
 
@@ -114,8 +115,10 @@ function set(e, f, x, y, size, deg) {
 	// signs that make the values a tiny bit worse to compress.
 	e.style.transformOrigin = `50px 50px`
 	e.style.transform = translate(x, y, size, deg)
+	e.style.visibility = "visible"
 	if (f) {
 		const z = getZone()
+		z.style.transformOrigin = `50px 50px`
 		z.style.transform = e.style.transform
 		z.style.display = "block"
 		z.onclick = function() { B.talking || f() }
@@ -126,7 +129,7 @@ function resize() {
 	const windowWidth = window.innerWidth,
 		windowHeight = window.innerHeight,
 		min = Math.min(windowWidth, windowHeight),
-		ratio = min / 300,
+		ratio = min / 100,
 		stageWidth = windowWidth / ratio,
 		stageHeight = windowHeight / ratio
 
@@ -141,16 +144,21 @@ function resize() {
 	style.display = "block"
 
 	resetZones()
-	set(World)
-	set(Guy, function() {
-		say([Guy, "Hello World!"])
-	})
-	set(Dude, function() {
-		say([Dude, "Hi!"])
-	}, 20, 20)
+
+	set(Throne)
+	set(King, function() {
+		say([King, "I've sent to see you."])
+	}, 0, -12, .4)
+	set(MusaBack, function() {
+		say([MusaBack, "Hello father."])
+	}, 22, 22, .5)
+	say([King, "Hello my son!"])
 }
 
 window.onload = function() {
+	for (const e of S.getElementsByTagName("g")) {
+		e.style.visibility = "hidden"
+	}
 	document.onclick = skip
 	document.onkeyup = skip
 	// Prevent pinch/zoom on iOS 11.

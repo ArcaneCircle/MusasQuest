@@ -35,23 +35,169 @@ svg {
 }
 #BP {
 	position: absolute;
-	left: calc(50% - .5em); bottom: -.4em;
+	left: calc(50% - 1em); bottom: -.9em;
 	width: 0; height: 0;
+	border-left: .5em solid transparent;
 	border-right: .5em solid transparent;
-	border-top: .5em solid #fff;
+	border-top: 1em solid #fff;
 }
 </style>
 </head>
 <body>
 <svg id="S">
-<g id="World">
-	<rect x="-50" y="-50" width="200" height="200" style="fill: rgb(220, 220, 220);"></rect>
+<g id="Throne">
+	<rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="-100" x="-100"/>
+	<rect width="300" height="170" style="fill: rgb(186, 139, 64);" y="30" x="-100"/>
+	<path style="fill: rgb(108, 74, 23);" d="M -100 35 L 62 31 L 200 31 L 200 27 L -100 28 L -100 35 Z"/>
+	<path d="M 28 45 L 72 42 L 94 64 L 6 67 L 28 45 Z" style="fill: rgb(167, 125, 56);"/>
+	<path d="M 3 12 L 7 11 L 14 12 L 28 38 L 9 41 L -11 38 L 3 12 Z" style="fill: rgb(107, 74, 23);"/>
+	<path d="M 9 41 L 7 11 L 14 12 L 28 38 L 9 41 Z" style="fill: rgb(150, 110, 43);"/>
+	<path style="fill: rgb(224, 209, 179);" d="M 72 24 C 72 24 74 18 74 18 L 77 24 L 81 24 C 81 24 83 20 83 20 L 85 24 L 93 24 C 93 24 95 20 95 20 L 97 24 L 101 24 L 104 19 L 106 25 L 108 33 L 100 34 L 69 32 L 72 24 Z"/>
 </g>
-<g id="Guy">
-	<circle style="fill: rgb(16, 16, 16);" cx="50" cy="50" r="2"></circle>
+<g id="Market">
+	<rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="-100" x="-100"/>
+	<rect width="300" height="170" style="fill: rgb(186, 139, 64);" y="30" x="-100"/>
+	<path style="fill: rgb(109, 74, 23);" d="M -100 49 L 58 44 L 200 48 L 200 26 L 58 27 L -100 24 L -100 49 Z"/>
+	<path style="fill: rgb(208, 180, 116);" d="M 58 61 L 58 36 L 105 36 L 105 61 C 105 66 66 69 58 61 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 82 20 L 58 36 L 105 36 L 82 20 Z"/>
+	<path style="fill: rgb(167, 125, 56);" d="M 68 65 L 68 40 L 82 40 L 82 66 L 68 65 Z"/>
+	<path style="fill: rgb(208, 180, 116);" d="M -9 57 L -9 35 L 32 35 L 32 57 C 21 62 -9 62 -9 57 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 12 20 L -9 35 L 32 35 L 12 20 Z"/>
+	<path style="fill: rgb(167, 125, 56);" d="M 12 61 L 12 38 L 22 38 L 22 60 L 12 61 Z"/>
+	<path style="fill: rgb(110, 74, 23);" d="M 69 65 L 69 41 L 81 41 L 81 66 L 69 65 Z"/>
+	<path style="fill: rgb(111, 75, 22);" d="M 13 61 L 13 39 L 21 39 L 21 60 L 13 61 Z"/>
+	<path style="fill: rgb(168, 126, 56);" d="M 13 61 L 33 77 L -100 153 L -100 190 L 51 94 L 200 200 L 200 154 L 71 79 L 81 66 L 69 65 L 48 70 L 21 60 L 13 61 Z"/>
+	<circle style="fill: rgb(248, 227, 28);" cx="76" cy="7" r="3"/>
+	<path style="fill: rgb(255, 255, 255);" d="M 53 13 L 90 14 C 102 14 83 2 71 10 C 61 0 42 13 53 13 Z"/>
+	<path style="fill: rgb(255, 255, 255);" d="M 40 13 L 10 13 C 0 13 19 0 29 9 C 36 -2 49 13 40 13 Z"/>
+	<path style="fill: rgb(168, 126, 56);" d="M 36 57 L 34 32 L 37 33 L 38 57 L 36 57 Z"/>
+	<path style="fill: rgb(168, 126, 56);" d="M 53 60 L 54 36 L 56 35 L 55 60 L 53 60 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 57 35 C 57 40 33 35 33 32 L 40 30 L 50 31 L 57 35 Z"/>
 </g>
-<g id="Dude">
-	<circle style="fill: rgb(200, 16, 16);" cx="50" cy="50" r="3"></circle>
+<g id="DesertDay">
+	<rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="-100" x="-100"/>
+	<path d="M -100 47 C -62 41 157 53 200 51 L 200 200 L -100 200 L -100 47 Z" style="fill: rgb(185, 139, 64);"/>
+	<circle style="fill: rgb(248, 227, 28);" cx="69" cy="10" r="4"/>
+</g>
+<g id="DesertNight">
+	<rect width="300" height="300" style="fill: rgb(15, 32, 65);" y="-100" x="-100"/>
+	<path d="M -100 67 C -62 61 157 73 200 71 L 200 200 L -100 200 L -100 67 Z" style="fill: rgb(118, 89, 39);"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="55" cy="29" r="1"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="85" cy="9" r="1"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="15" cy="19" r="1"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="35" cy="7" r="1"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="74" cy="19" r="1"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="61" cy="14" r="6"/>
+	<circle style="fill: rgb(14, 33, 65);" cx="58" cy="16" r="6"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="25" cy="35" r="1"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="87" r="1" cy="40"/>
+	<circle style="fill: rgb(255, 255, 255);" cx="4" cy="44" r="1"/>
+</g>
+<g id="Camp">
+	<rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="-100" x="-100"/>
+	<path style="fill: rgb(114, 78, 21);" d="M 22 46 L 22 35 L 23 36 L 22 46 Z"/>
+	<path d="M -100 47 C -62 41 163 57 200 47 L 200 200 L -100 200 L -100 47 Z" style="fill: rgb(185, 139, 64);"/>
+	<path style="fill: rgb(208, 180, 116);" d="M 48 51 L 74 54 L 60 38 L 48 51 Z"/>
+	<path style="fill: rgb(114, 78, 21);" d="M 57 57 L 58 36 L 60 35 L 59 57 L 57 57 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 12 48 L 22 37 C 27 40 47 40 60 38 L 43 58 L 12 48 Z"/>
+</g>
+<g id="King">
+	<path d="M 17 87 L 83 87 L 87 93 L 13 93 L 17 87 Z" style="fill: rgb(108, 74, 23);"/>
+	<path d="M 21 69 L 79 69 L 83 75 L 17 75 L 21 69 Z" style="fill: rgb(151, 6, 6);"/>
+	<path d="M 17 75 L 83 75 L 81 90 L 19 90 L 17 75 Z" style="fill: rgb(151, 111, 42);"/>
+	<path d="M 14 97 L 86 97 L 87 93 L 13 93 L 14 97 Z" style="fill: rgb(152, 112, 42);"/>
+	<path d="M 21 60 C 25 59 75 59 79 60 C 81 63 81 69 81 69 L 19 69 C 19 69 19 63 21 60 Z" style="fill: rgb(176, 9, 9);"/>
+	<ellipse style="fill: rgb(199, 9, 8);" cx="17" rx="4" ry="8" cy="69"/>
+	<ellipse style="fill: rgb(199, 9, 8);" cx="83" rx="4" ry="8" cy="69"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 51 45 L 46 36 L 36 40 L 32 60 L 40 63 L 29 66 C 25 66 25 71 31 73 L 44 77 L 50 73 L 56 77 L 69 73 C 75 71 75 66 71 66 L 61 63 L 69 60 L 64 40 L 54 36 L 51 45 Z"/>
+	<path style="fill: rgb(72, 49, 14);" d="M 44 27 L 41 21 C 41 5 59 5 59 21 L 56 27 L 44 27 Z"/>
+	<path style="fill: rgb(110, 74, 23);" d="M 46 31 L 46 36 L 51 45 L 54 36 L 54 31 L 46 31 Z"/>
+	<path style="fill: rgb(72, 49, 14);" d="M 54 71 L 46 73 C 46 73 44 80 44 80 L 50 75 L 56 76 L 54 71 Z"/>
+	<path style="fill: rgb(110, 74, 23);" d="M 45 71 L 54 75 L 52 85 L 48 77 L 44 76 L 45 71 Z"/>
+	<path style="fill: rgb(111, 75, 22);" d="M 44 30 L 43 22 C 48 15 57 18 57 22 L 56 30 L 44 30 Z"/>
+	<path style="fill: rgb(72, 49, 14);" d="M 44 30 L 50 38 L 56 30 C 56 26 44 26 44 30 Z"/>
+	<path style="fill: rgb(248, 227, 28);" d="M 41 21 L 38 7 L 45 14 L 50 3 L 55 14 L 62 7 L 59 21 C 59 15 41 15 41 21 Z"/>
+	<path style="fill: rgb(112, 76, 22);" d="M 32 60 L 43 67 L 52 69 L 52 67 L 50 67 L 50 66 L 46 66 L 38 58 L 32 60 Z"/>
+	<path style="fill: rgb(112, 76, 22);" d="M 69 60 L 58 67 L 49 69 L 49 67 L 51 67 L 51 66 L 55 66 L 63 58 L 69 60 Z"/>
+</g>
+<g id="MusaBack">
+	<path style="fill: rgb(114, 78, 21);" d="M 59 83 L 60 91 L 64 92 L 61 97 L 57 97 L 54 84 L 59 83 Z"/>
+	<path style="fill: rgb(114, 78, 21);" d="M 39 86 L 38 92 L 34 93 L 37 98 L 41 98 L 44 85 L 39 86 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 63 30 L 67 50 L 62 65 L 59 73 L 59 66 L 57 68 L 60 63 L 62 51 L 59 42 L 63 30 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 38 30 L 33 48 L 37 64 L 40 72 L 40 66 L 42 67 L 39 63 L 38 49 L 41 41 L 38 30 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 52 3 L 58 8 L 60 18 L 56 25 L 63 30 L 60 40 L 58 53 L 60 84 L 38 87 L 42 54 L 40 39 L 38 30 L 44 25 L 42 17 L 45 7 L 52 3 Z"/>
+</g>
+<g id="Musa">
+	<path style="fill: rgb(114, 78, 21);" d="M 41 81 L 39 94 L 34 98 L 38 99 L 43 95 L 46 82 L 41 81 Z"/>
+	<path style="fill: rgb(114, 78, 21);" d="M 61 84 L 63 94 L 68 98 L 64 99 L 59 95 L 56 83 L 61 84 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 48 1 L 42 6 L 40 16 L 44 23 L 37 28 L 40 38 L 42 51 L 40 82 L 62 85 L 58 52 L 60 37 L 62 28 L 56 23 L 58 15 L 55 5 L 48 1 Z"/>
+	<path style="fill: rgb(112, 76, 22);" d="M 45 6 L 43 11 L 46 20 L 49 22 L 53 20 L 55 11 L 52 7 L 45 6 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 37 28 L 33 48 L 36 64 L 39 72 L 39 65 L 41 67 L 38 62 L 38 49 L 41 40 L 37 28 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 62 28 L 67 46 L 64 62 L 61 70 L 61 64 L 59 65 L 62 61 L 62 47 L 59 39 L 62 28 Z"/>
+</g>
+<g id="Seer">
+	<path style="fill: rgb(72, 49, 14);" d="M 47 26 L 47 33 L 38 36 L 40 43 L 45 56 L 32 49 L 28 54 L 39 69 L 33 71 L 38 73 L 44 70 L 43 67 L 58 67 L 56 70 L 61 75 L 65 73 L 61 69 L 72 55 L 69 50 L 57 56 L 61 44 L 62 36 L 53 33 L 53 26 L 47 26 Z"/>
+	<path style="fill: rgb(112, 76, 22);" d="M 55 20 L 56 24 L 54 30 L 50 33 L 46 30 L 44 24 L 45 21 L 55 20 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 45 21 L 43 12 L 56 13 L 55 20 L 45 21 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 57 56 L 45 56 L 32 49 L 28 54 L 39 69 L 43 67 L 58 67 L 61 69 L 72 55 L 69 50 L 57 56 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 36 47 L 40 43 L 38 36 L 29 48 L 44 57 L 46 61 L 47 58 L 45 54 L 36 47 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 65 47 L 61 44 L 62 36 L 72 48 L 55 58 L 52 61 L 51 58 L 55 54 L 65 47 Z"/>
+	<ellipse style="fill: rgb(176, 9, 10);" cx="50" cy="82" rx="14" ry="6"/>
+	<ellipse style="fill: rgb(199, 9, 8);" cx="50" cy="81" rx="11" ry="4"/>
+</g>
+<g id="Bodyguard">
+	<path style="fill: rgb(114, 78, 21);" d="M 37 80 L 38 92 L 33 96 L 37 97 L 42 93 L 42 81 L 37 80 Z"/>
+	<path style="fill: rgb(114, 78, 21);" d="M 57 80 L 58 93 L 63 97 L 59 98 L 54 94 L 52 82 L 57 80 Z"/>
+	<path style="fill: rgb(33, 71, 141);" d="M 27 43 L 39 50 L 35 86 L 45 87 L 47 83 L 51 88 L 60 86 L 55 50 L 68 46 L 63 34 L 32 33 L 27 43 Z"/>
+	<path style="fill: rgb(199, 9, 8);" d="M 31 33 L 37 50 L 37 58 L 34 78 L 43 81 L 47 62 L 52 83 L 61 80 L 57 58 L 57 50 L 64 34 L 54 25 L 40 24 L 31 33 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 28 43 L 28 48 L 30 65 L 33 73 L 33 67 L 35 68 L 32 63 L 32 50 L 34 47 L 28 43 Z"/>
+	<path style="fill: rgb(199, 9, 8);" d="M 38 9 L 41 15 L 53 15 L 57 10 L 55 6 L 47 3 L 40 5 L 38 9 Z"/>
+	<path style="fill: rgb(223, 210, 179);" d="M 39 24 L 41 12 L 46 10 L 53 12 L 55 25 L 59 29 L 47 26 L 35 29 L 39 24 Z"/>
+	<path style="fill: rgb(112, 76, 22);" d="M 47 12 L 42 14 L 42 20 L 47 18 L 52 20 L 52 14 L 47 12 Z"/>
+	<path style="fill: rgb(72, 49, 14);" d="M 37 51 L 48 53 L 57 51 L 57 57 L 48 58 L 37 56 L 37 51 Z"/>
+	<path style="fill: rgb(216, 216, 216);" d="M 53 57 L 71 89 L 74 91 L 74 87 L 55 56 L 60 53 C 60 53 59 52 59 52 L 47 58 L 48 59 L 53 57 Z"/>
+	<path style="fill: rgb(72, 49, 14);" d="M 52 56 L 48 49 L 50 48 L 55 55 L 52 56 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 67 46 L 67 49 L 65 66 L 62 74 L 62 68 L 60 69 L 63 64 L 63 51 L 61 48 L 67 46 Z"/>
+</g>
+<g id="Camel">
+	<path style="fill: rgb(223, 210, 179);" d="M 89 19 L 83 16 L 74 15 L 62 30 L 55 32 L 37 21 L 21 29 L 12 44 L 12 66 L 15 86 L 20 86 L 18 83 L 15 68 L 18 54 L 20 66 L 28 83 L 28 86 L 33 86 L 31 83 L 23 67 L 25 53 L 40 54 L 54 52 L 53 67 L 51 86 L 55 86 L 53 82 L 57 68 L 60 53 L 64 68 L 71 85 L 75 85 L 72 82 L 67 66 L 65 53 L 74 41 L 80 22 L 89 19 Z"/>
+</g>
+<g id="Scorpion">
+	<path style="fill: rgb(49, 34, 10);" d="M 26 44 L 35 46 L 46 43 L 40 47 L 46 48 L 59 44 L 50 49 L 54 50 L 69 48 L 59 52 L 66 57 L 81 55 L 83 72 C 83 72 75 62 75 61 C 75 60 64 61 64 61 L 59 66 L 63 75 L 76 76 L 58 81 L 55 68 L 48 63 L 39 77 L 43 60 L 40 58 L 32 71 L 36 56 L 32 53 L 24 63 L 29 51 L 20 45 L 18 31 L 35 20 L 59 36 L 32 31 L 24 34 L 26 44 Z"/>
+</g>
+<g id="Bandit">
+	<path style="fill: rgb(114, 78, 21);" d="M 32 59 L 28 91 L 21 95 L 27 96 L 34 93 L 35 79 L 39 66 L 44 78 L 45 92 L 52 94 L 56 92 L 50 89 L 50 78 L 47 57 L 32 59 Z"/>
+	<path style="fill: rgb(70, 47, 15);" d="M 38 4 L 32 14 L 34 23 L 27 29 L 31 55 L 28 81 L 50 70 L 49 54 L 52 29 L 47 25 L 50 15 L 47 6 L 38 4 Z"/>
+	<path style="fill: rgb(112, 76, 22);" d="M 43 10 L 35 14 L 37 22 L 44 24 L 47 14 L 43 10 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 27 29 L 22 50 L 25 66 L 28 74 L 28 67 L 30 69 L 27 64 L 27 51 L 30 42 L 27 29 Z"/>
+	<path style="fill: rgb(216, 216, 216);" d="M 70 50 L 80 20 L 77 15 L 74 18 L 67 49 L 62 45 C 62 45 62 48 62 48 L 68 52 L 75 53 L 76 51 L 70 50 Z"/>
+	<path style="fill: rgb(70, 47, 15);" d="M 63 60 L 66 51 L 69 52 L 65 61 L 63 60 Z"/>
+	<path style="fill: rgb(113, 77, 21);" d="M 52 29 L 56 47 L 66 52 L 67 54 L 66 55 L 65 54 L 64 57 L 62 54 L 51 51 L 50 42 L 52 29 Z"/>
+	<path style="fill: rgb(114, 78, 21);" d="M 64 57 L 67 53 L 69 54 L 67 58 L 64 57 Z"/>
+</g>
+<g id="Crusader">
+	<path style="fill: rgb(101, 101, 101);" d="M 42 78 L 43 28 L 45 26 L 58 25 L 59 28 L 61 78 L 61 89 L 67 95 L 56 93 L 55 76 L 52 70 L 49 77 L 50 94 L 39 96 L 45 90 L 42 78 Z"/>
+	<path style="fill: rgb(239, 239, 239);" d="M 39 30 L 41 38 L 42 56 L 41 79 L 51 82 L 53 63 L 54 83 L 63 80 L 60 55 L 62 37 L 64 29 L 59 27 L 52 31 L 43 27 L 39 30 Z"/>
+	<path style="fill: rgb(216, 216, 216);" d="M 45 26 L 43 9 L 50 5 L 59 10 L 58 26 L 52 27 L 45 26 Z"/>
+	<path style="fill: rgb(60, 60, 60);" d="M 48 16 L 45 14 L 57 14 L 54 16 L 48 16 Z"/>
+	<path style="fill: rgb(239, 239, 239);" d="M 26 55 L 26 92 L 28 95 L 30 92 L 29 55 L 34 57 C 34 57 34 53 34 53 L 21 53 L 21 57 L 26 55 Z"/>
+	<path style="fill: rgb(60, 60, 60);" d="M 26 53 L 26 44 L 29 44 L 29 53 L 26 53 Z"/>
+	<path style="fill: rgb(101, 101, 101);" d="M 34 44 L 35 36 L 39 30 L 42 39 L 39 47 L 31 52 L 29 53 L 29 49 L 26 48 L 29 47 L 31 48 L 34 44 Z"/>
+	<path style="fill: rgb(199, 9, 8);" d="M 51 50 L 50 44 L 45 44 L 45 41 L 50 40 L 50 34 L 53 34 L 53 40 L 58 41 L 58 43 L 53 44 L 54 50 L 51 50 Z"/>
+	<path style="fill: rgb(216, 216, 216);" d="M 58 73 L 58 55 L 77 50 L 80 71 L 71 95 L 58 73 Z"/>
+	<path style="fill: rgb(60, 60, 60);" d="M 42 57 L 42 54 L 60 52 L 60 56 L 42 57 Z"/>
+	<path style="fill: rgb(101, 101, 101);" d="M 70 52 L 68 35 L 64 29 L 61 38 L 64 49 L 56 53 L 54 58 L 56 62 L 58 57 L 70 52 Z"/>
+	<path style="fill: rgb(199, 9, 8);" d="M 69 83 L 68 68 L 62 68 L 62 65 L 68 64 L 67 57 L 71 56 L 71 63 L 76 62 L 76 65 L 72 67 L 71 83 L 69 83 Z"/>
+	<path style="fill: rgb(101, 101, 101);" d="M 25 53 L 25 49 L 28 49 L 29 53 L 25 53 Z"/>
+</g>
+<g id="Tuck">
+	<path style="fill: rgb(242, 134, 76);" d="M 61 76 L 60 88 L 65 92 L 61 93 L 56 89 L 56 77 L 61 76 Z"/>
+	<path style="fill: rgb(242, 134, 76);" d="M 41 76 L 40 89 L 35 93 L 39 94 L 44 90 L 46 78 L 41 76 Z"/>
+	<path style="fill: rgb(77, 51, 16);" d="M 37 28 L 44 20 L 54 20 L 62 28 L 64 30 L 61 52 L 64 86 L 37 84 L 40 51 L 35 31 L 37 28 Z"/>
+	<path style="fill: rgb(241, 134, 76);" d="M 45 23 L 43 11 L 48 7 L 54 10 L 55 18 L 52 23 L 45 23 Z"/>
+	<path style="fill: rgb(110, 74, 23);" d="M 36 28 L 48 37 L 63 28 L 54 20 L 56 24 L 49 27 L 43 24 L 44 20 L 36 28 Z"/>
+	<path style="fill: rgb(111, 75, 22);" d="M 33 51 L 35 31 L 39 47 L 50 50 L 49 57 L 43 54 L 33 51 Z"/>
+	<path style="fill: rgb(111, 75, 22);" d="M 67 51 L 64 31 L 61 42 L 61 47 L 49 49 L 51 57 L 56 53 L 67 51 Z"/>
 </g>
 </svg>
 <div id="B"><div id="BM"></div><div id="BP"></div></div>
