@@ -1,6 +1,6 @@
 "use strict"
 
-let centerX, centerY, zones = []
+let centerX, centerY, hasTouch, zones = []
 
 function clear() {
 	clearTimeout(B.tid)
@@ -87,7 +87,6 @@ function newZone() {
 	z.setAttributeNS(null, "cx", 50)
 	z.setAttributeNS(null, "cy", 50)
 	z.setAttributeNS(null, "r", 10)
-	//z.setAttributeNS(null, "fill", "rgba(0, 0, 0, .1)")
 	z.setAttributeNS(null, "fill", "rgba(0, 0, 0, 0)")
 	return z
 }
@@ -118,11 +117,20 @@ function set(e, f, x, y, size, deg) {
 	e.style.transform = translate(x, y, size, deg)
 	e.style.visibility = "visible"
 	if (f) {
-		const z = getZone()
-		z.style.transformOrigin = `50px 50px`
-		z.style.transform = e.style.transform
-		z.style.display = "block"
-		z.onclick = function() { B.talking || f() }
+		const onclick = function() { B.talking || f() },
+			children = e.children
+		for (let i = children.length; i--;) {
+			const child = children[i]
+			child.onclick = onclick
+		}
+		// Add a finger-tip sized hotspot for small targets.
+		if (hasTouch) {
+			const z = getZone()
+			z.style.transformOrigin = `50px 50px`
+			z.style.transform = e.style.transform
+			z.style.display = "block"
+			z.onclick = onclick
+		}
 	}
 }
 
@@ -172,7 +180,7 @@ window.onload = function() {
 	document.onclick = skip
 	document.onkeyup = skip
 	// Prevent pinch/zoom on iOS 11.
-	if ('ontouchstart' in document) {
+	if ((hasTouch = 'ontouchstart' in document)) {
 		document.addEventListener('gesturestart', function(event) {
 			event.preventDefault()
 		}, false)
