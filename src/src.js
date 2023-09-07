@@ -16,9 +16,9 @@ const state = {
 					action: () => show("Market")
 				},
 			]])
-		}, 0, -20, .4)
+		}, 0, -20, .4, 0, "The king")
 		set(MusaBack, function() {
-		}, 25, 22, .5)
+		}, 25, 22, .5, 0, "Me")
 		say([
 			King, "Hello my son!",
 			King, "I have a quest for you.",
@@ -26,8 +26,8 @@ const state = {
 	},
 	Market: function() {
 		set(Market)
-		set(Musa, function() {}, 31, 20, .55)
-		set(Seer, function() {}, -37, 12, .5)
+		set(Musa, function() {}, 31, 20, .55, 0, "Still me")
+		set(Seer, function() {}, -37, 12, .5, 0, "The seer")
 	}
 }
 
@@ -140,13 +140,40 @@ function translate(x, y, size, deg) {
 		deg || 0}deg) scale(${size || 1})`
 }
 
-function set(e, f, x, y, size, deg) {
+function hideInfo() {
+	Info.style.display = "none"
+}
+
+function showInfo(m) {
+	Info.innerHTML = m
+	Info.style.display = "block"
+}
+
+function setHotspot(e, m) {
+	if (hasTouch) {
+		const children = e.children
+		for (let i = children.length; i--;) {
+			const e = children[i]
+			e.hoverMessage = m
+		}
+	} else {
+		e.onmousemove = function(event) {
+			showInfo(m)
+			event.stopPropagation()
+		}
+	}
+}
+
+function set(e, f, x, y, size, deg, hover) {
 	// Transform origin at runtime to keep sprite coordinates in the
 	// 0-99 range. If the source is centered at 0/0, there are minus
 	// signs that make the values a tiny bit worse to compress.
 	e.style.transformOrigin = `50px 50px`
 	e.style.transform = translate(x, y, size, deg)
 	e.style.visibility = "visible"
+	if (hover) {
+		setHotspot(e, hover)
+	}
 	if (f) {
 		const onclick = function() { B.talking || f() },
 			children = e.children
@@ -166,6 +193,7 @@ function set(e, f, x, y, size, deg) {
 }
 
 function show(name) {
+	hideInfo()
 	clear()
 	for (const e of S.getElementsByTagName("g")) {
 		e.style.visibility = "hidden"
@@ -211,6 +239,21 @@ window.onload = function() {
 		document.addEventListener('gestureend', function(event) {
 			event.preventDefault()
 		}, false)
+		document.ontouchstart = document.ontouchmove = function(event) {
+			const touches = event.touches
+			if (touches && touches.length > 0) {
+				const t = touches[0],
+					e = document.elementFromPoint(t.pageX, t.pageY)
+				if (e && e.hoverMessage) {
+					showInfo(e.hoverMessage)
+				} else {
+					hideInfo()
+				}
+			}
+		}
+		document.ontouchend = document.ontouchcancel = hideInfo
+	} else {
+		document.onmousemove = hideInfo
 	}
 	window.onresize = resize
 	resize()
