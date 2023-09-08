@@ -12,8 +12,20 @@ const state = {
 					action: () => say([King, "Well…"])
 				},
 				{
-					text: () => "Excuse me, I've got to go.",
+					text: () => "Excuse me, I've got to buy stuff.",
 					action: () => show("Market")
+				},
+				{
+					text: () => "On it!",
+					action: () => show("DesertDay")
+				},
+				{
+					text: () => "Let's go camping!",
+					action: () => show("Camp")
+				},
+				{
+					text: () => "Look at the stars.",
+					action: () => show("DesertNight")
 				},
 			]])
 		}, 0, -10, .4, 0, "Talk to the king")
@@ -26,9 +38,38 @@ const state = {
 	},
 	Market: function() {
 		set(Market)
-		set(Musa, function() {}, 31, 20, .55, 0)
-		set(Seer, function() {}, -37, 12, .5, 0, "Talk to the seer")
-	}
+		set(Musa, null, 31, 20, .55, 0)
+		set(Bodyguard, function() {
+		}, -4, 0, .45, 0, "Talk to my bodyguard")
+		set(Seer, function() {
+			say([
+				Musa, "Can you tell me where I can find a gift?",
+				Seer, "Sure! Let me have a look into your future…",
+				Seer, "Hmmmm",
+			])
+		}, -37, 12, .5, 0, "Talk to the seer")
+	},
+	DesertDay: function() {
+		set(DesertDay)
+		set(Camel, function() {
+			say([Camel, "Boo"])
+		}, 2, -5, .5, 0, "Talk to the camel")
+		set(Musa, null, 31, 16, .5, 0)
+		set(Bodyguard, function() {
+			say([Bodyguard, "Hurry up! Let's go!"])
+		}, -31, 12, .55, 0, "Talk to my bodyguard")
+	},
+	DesertNight: function() {
+		set(DesertNight)
+	},
+	Camp: function() {
+		set(Camp)
+		set(Scorpion, function() {
+			say([Musa, "Better keep my distance."])
+		}, -32, 35, .1, 0, "A scorpion")
+		set(Musa, null, 35, 14, .5, 0)
+		set(Bandit, null, -35, 0, .4, 0)
+	},
 }
 
 let centerX, centerY, hasTouch, zones = []
