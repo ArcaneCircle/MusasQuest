@@ -13,25 +13,48 @@ const state = {
 					action: () => say([King, "Well…"])
 				},
 				{
-					text: () => "Excuse me, I've got to buy stuff.",
+					text: () => "Market",
 					action: () => show("Market")
 				},
 				{
-					text: () => "On it!",
+					text: () => "DesertNight",
+					action: () => cutAndShow("A few days later…", "DesertNight")
+				},
+				{
+					text: () => "CampNight",
+					action: () => show("CampNight")
+				},
+				{
+					text: () => "CampDay",
+					action: () => show("CampDay")
+				},
+				{
+					text: () => "DesertDay",
 					action: () => show("DesertDay")
 				},
 				{
-					text: () => "Let's go camping!",
-					action: () => show("Camp")
+					text: () => "DesertEntry",
+					action: () => show("DesertEntry")
 				},
 				{
-					text: () => "Look at the stars.",
-					action: () => show("DesertNight")
+					text: () => "Cave",
+					action: () => show("Cave")
+				},
+				{
+					text: () => "BeforeCity",
+					action: () => show("BeforeCity")
+				},
+				{
+					text: () => "BeforeCastle",
+					action: () => show("BeforeCastle")
 				},
 			]])
 		}, 0, -10, .4, 0, "Talk to the king")
 		set(MusaBack, function() {
-		}, 25, 22, .5, 0, "Me")
+		}, 25, 18, .5, 0, "Me")
+		set(Guard, function() {
+			say([Guard, "At your service, my prince"])
+		}, -26, 5, .5, 0, "A guard")
 		say([
 			King, "Hello my son!",
 			King, "I have a quest for you.",
@@ -39,9 +62,18 @@ const state = {
 	},
 	Market: function() {
 		set(Market)
-		set(Musa, null, 31, 20, .55, 0)
-		set(Bodyguard, function() {
-		}, -4, 0, .45, 0, "Talk to my bodyguard")
+		set(Musa, null, 31, 15, .55, 0)
+		set(Guard, function() {
+		}, -26, -4, .3, 0, "Talk to my bodyguard")
+		set(RedFruits, function() {
+			say([Musa, "These are tasty! I like them!"])
+		}, 0, 0, 0, 0, "Red fruits")
+		set(YellowFruits, function() {
+			say([Musa, "Urgh, the yellow ones make me sick."])
+		}, 0, 0, 0, 0, "Yellow fruits")
+		set(GreenFruits, function() {
+			say([Musa, "Green is nice!"])
+		}, 0, 0, 0, 0, "Green fruits")
 		set(Seer, function() {
 			say([
 				Musa, "Can you tell me where I can find a gift?",
@@ -50,36 +82,81 @@ const state = {
 			])
 		}, -37, 12, .5, 0, "Talk to the seer")
 	},
-	DesertDay: function() {
-		set(DesertDay)
-		set(Camel, function() {
-			say([Camel, "Boo"])
-		}, 2, -5, .5, 0, "Talk to the camel")
-		set(Musa, null, 31, 16, .5, 0)
-		set(Bodyguard, function() {
-			say([Bodyguard, "Hurry up! Let's go!"])
-		}, -31, 12, .55, 0, "Talk to my bodyguard")
-	},
 	DesertNight: function() {
 		set(DesertNight)
+		set(Camel, null, -10, 12, .2)
 	},
-	Camp: function() {
-		set(Camp)
+	CampNight: function() {
+		set(CampNight)
 		set(Scorpion, function() {
 			say([Musa, "Better keep my distance."])
 		}, -32, 35, .1, 0, "A scorpion")
+		set(Guard, function() {
+			say([
+				Guard, "I will take the first watch",
+				Guard, "And the second",
+			])
+		}, -31, 12, .55, 0, "Talk to my bodyguard")
 		set(Musa, null, 35, 14, .5, 0)
-		set(Bandit, null, -35, 0, .4, 0)
 	},
-}
+	CampDay: function() {
+		set(CampDay)
+		set(Bandit, null, -35, -10, .4, 0)
+		set(GuardDead, null, -5, 25, .5, 0)
+		set(MusaBound, null, 36, 14, .5, 0)
+	},
+	DesertDay: function() {
+		set(DesertDay)
+		set(Musa, null, 31, 16, .5, 0)
+	},
+	DesertEntry: function() {
+		set(DesertEntry)
+		set(Idol, function() {
+		}, 20, 7, .4)
+		set(MusaBack, null, -20, 16, .5, 0)
+	},
+	Cave: function() {
+		set(Cave)
+		set(Lamp, function() {
+			set(Jinn, function() {
+				say([Jinn, "The carpet only flies when no one is looking"], function() {
+					Jinn.style.visibility = "hidden"
+				})
+			}, 7, 0, .5, 0, "Talk to the Jinn")
+		}, 8, 7, .2, 0, "A golden lamp")
+		set(Rug, function() {
+			addToInventory(Rug, function() {
+				say([currentMusa(), "I don't know how"])
+			})
+		}, 10, 30, .3, 20, "A rug")
+		set(Musa, null, -10, 24, .3, 0)
+	},
+	BeforeCity: function() {
+		set(BeforeCity)
+		set(Crusader, function() {
+		}, 0, 0, .45)
+		set(MusaBack, null, -31, 17, .5, 0)
+	},
+	BeforeCastle: function() {
+		set(BeforeCastle)
+		set(Tuck, function() {
+		}, 0, 0, .45)
+		set(MusaBack, null, -31, 17, .5, 0)
+	},
+}, zones = []
 
-let centerX, centerY, hasTouch, zones = []
+let centerX, centerY, hasTouch
+
+function currentMusa() {
+	return [Musa, MusaBack, MusaBound].find(dave =>
+		dave.style.visibility == "visible")
+}
 
 function updateInventory() {
 	let x = 0
 	state.inventory.forEach(e => {
 		e.style.transformOrigin = "left top"
-		e.style.transform = `translate(${x}px, 0px) scale(.3)`
+		e.style.transform = `translate(${x}px, 0px) scale(.1)`
 		e.style.visibility = "visible"
 		e.onclick = function() {
 			if (B.talking) {
@@ -87,11 +164,20 @@ function updateInventory() {
 			} else if (e.use) {
 				e.use()
 			} else {
-				noUse()
+				say([currentMusa(), "This has no use here"])
 			}
 		}
 		x += 35
 	})
+}
+
+function removeOnClick(e) {
+	const children = e.children
+	for (let i = children.length; i--;) {
+		const e = children[i]
+		e.onclick = null
+	}
+	e.onclick = null
 }
 
 function removeFromInventory(e) {
@@ -102,6 +188,7 @@ function removeFromInventory(e) {
 
 function addToInventory(item, f) {
 	if (!state.inventory.includes(item)) {
+		removeOnClick(item)
 		item.style.visibility = "hidden"
 		item.use = f
 		state.inventory.push(item)
@@ -218,7 +305,7 @@ function translate(x, y, size, deg) {
 }
 
 function info(m) {
-	Info.innerHTML = typeof m == "string" ? m : "&nbsp;"
+	I.innerHTML = typeof m == "string" ? m : "&nbsp;"
 }
 
 function setHotspot(e, m) {
@@ -247,8 +334,10 @@ function set(e, f, x, y, size, deg, hover) {
 		setHotspot(e, hover)
 	}
 	if (f) {
-		const onclick = function() { B.talking || f() },
-			children = e.children
+		const onclick = function(event) {
+			B.talking || f()
+			event.stopPropagation()
+		}, children = e.children
 		for (let i = children.length; i--;) {
 			const child = children[i]
 			child.onclick = onclick
@@ -278,6 +367,15 @@ function show(name) {
 	state.scene = name
 	scenes[name]()
 	updateInventory()
+}
+
+function cutAndShow(m, name) {
+	M.innerHTML = m
+	M.style.display = "block"
+	setTimeout(function() {
+		M.style.display = "none"
+		show(name)
+	}, 1000 + 200 * m.split(' ').length)
 }
 
 function resize() {
