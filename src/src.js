@@ -2,6 +2,7 @@
 
 const state = {
 	scene: "Throne",
+	inventory: [],
 }, scenes = {
 	Throne: function() {
 		set(Throne)
@@ -73,6 +74,40 @@ const state = {
 }
 
 let centerX, centerY, hasTouch, zones = []
+
+function updateInventory() {
+	let x = 0
+	state.inventory.forEach(e => {
+		e.style.transformOrigin = "left top"
+		e.style.transform = `translate(${x}px, 0px) scale(.3)`
+		e.style.visibility = "visible"
+		e.onclick = function() {
+			if (B.talking) {
+				return
+			} else if (e.use) {
+				e.use()
+			} else {
+				noUse()
+			}
+		}
+		x += 35
+	})
+}
+
+function removeFromInventory(e) {
+	e.style.visibility = "hidden"
+	state.inventory = state.inventory.filter(item => item != e)
+	updateInventory()
+}
+
+function addToInventory(item, f) {
+	if (!state.inventory.includes(item)) {
+		item.style.visibility = "hidden"
+		item.use = f
+		state.inventory.push(item)
+		updateInventory()
+	}
+}
 
 function clear() {
 	clearTimeout(B.tid)
@@ -242,6 +277,7 @@ function show(name) {
 	}
 	state.scene = name
 	scenes[name]()
+	updateInventory()
 }
 
 function resize() {
