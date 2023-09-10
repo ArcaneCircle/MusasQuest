@@ -95,9 +95,11 @@ const state = {
 				})
 			}
 		}, 0, 0, 1, 0, "Our tent")
-		set(Scorpion, function() {
-			say([Musa, "Better keep my distance"])
-		}, -10, 35, .1, 0, "A scorpion")
+		if (!state.scorpion) {
+			set(Scorpion, function() {
+				say([Musa, "Better keep my distance"])
+			}, -10, 35, .1, 0, "A scorpion")
+		}
 		set(Bamidele, function() {
 			if (state.scorpion) {
 				say([
@@ -112,55 +114,44 @@ const state = {
 				])
 			}
 		}, -31, 5, .55, 0, "Talk to my Bamidele")
-		set(HelmetOnBamidele, function() {
-			say([Musa, "Give me your helmet"], function() {
-				say([
-					Bamidele, "Why?",
-					Musa, "Because I am your prince and I want to catch it!",
-					Bamidele, "Fine, have it",
-				], function() {
-					remove(HelmetOnBamidele)
-					addToInventory(Helmet, function() {
-						if (state.scorpion) {
-							if (state.scene == "CampDay") {
-								say([
-									currentMusa(), "Want a helmet?",
-									Robber, "Give me everything you have!",
-									currentMusa(), "Take it"
-								], function() {
-									removeFromInventory(Helmet)
-									shade("Aaaahhh!", function() {
-										remove(Robber)
-										remove(MusaBound)
-										set(Musa, null, 36, 14, .5, 0)
-										set(Chains, function() {
-											addToInventory(Chains)
-										}, 36, 44, .13, 0, "Chains")
-										set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
-										set(Helmet, function() {
-											say([currentMusa(), "Won't touch the thing!"])
-										}, -37, 10, .05, -22, "Helmet")
-										set(RobberSword, function() {
-											addToInventory(RobberSword)
-										}, -40, 15, .2, 100, "Sword")
+		if (!state.inventory.includes(Helmet)) {
+			set(HelmetOnBamidele, function() {
+				say([Musa, "Give me your helmet"], function() {
+					say([
+						Bamidele, "Why?",
+						Musa, "Because I am your prince and I want to catch it!",
+						Bamidele, "Fine, have it",
+					], function() {
+						remove(HelmetOnBamidele)
+						addToInventory(Helmet, function() {
+							if (state.scorpion) {
+								if (state.scene == "CampDay") {
+									say([
+										currentMusa(), "Want a helmet?",
+										Robber, "Give me everything you have!",
+										currentMusa(), "Take it"
+									], function() {
+										removeFromInventory(Helmet)
+										shade("Aaaahhh!", function() {
+											show("CampDead")
+										})
 									})
-								})
+								} else {
+									say([currentMusa(), "A scorpion in a helmet"])
+								}
 							} else {
-								say([currentMusa(), "A scorpion in a helmet"])
+								remove(Scorpion)
+								state.scorpion = 1
+								say([
+									currentMusa(), "Got you!",
+									Bamidele, "You can keep the helmet"
+								])
 							}
-						} else {
-							remove(Scorpion)
-							state.scorpion = 1
-							say([
-								currentMusa(), "Got you!",
-								Bamidele, "You can keep the helmet"
-							])
-						}
+						})
 					})
 				})
-			})
-
-		}, -31, 5, .55, 0, "Bamidele's helmet")
+			}, -31, 5, .55, 0, "Bamidele's helmet")
+		}
 		set(Musa, null, 35, 14, .5, 0)
 	},
 	CampDay: function() {
@@ -178,6 +169,27 @@ const state = {
 		set(MusaBound, null, 36, 14, .5, 0)
 		set(Chains, null, 36, 24, .13, 0)
 		say([Robber, "Good morning, slave!"])
+	},
+	CampDead: function() {
+		set(CampDay)
+		set(Tent)
+		set(BamideleDead, function() {
+		}, -5, 25, .5, 0, "Dead guard")
+		set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
+		set(Helmet, function() {
+			say([currentMusa(), "Won't touch the thing!"])
+		}, -37, 10, .05, -22, "Helmet")
+		if (!state.inventory.includes(RobberSword)) {
+			set(RobberSword, function() {
+				addToInventory(RobberSword)
+			}, -40, 15, .2, 100, "Sword")
+		}
+		set(Musa, null, 36, 14, .5, 0)
+		if (!state.inventory.includes(Chains)) {
+			set(Chains, function() {
+				addToInventory(Chains)
+			}, 36, 44, .13, 0, "Chains")
+		}
 	},
 	DesertDay: function() {
 		set(DesertDay)
