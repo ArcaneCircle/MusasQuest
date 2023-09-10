@@ -135,14 +135,14 @@ const state = {
 										set(Musa, null, 36, 14, .5, 0)
 										set(Chains, function() {
 											addToInventory(Chains)
-										}, 36, 32, .5, 0, "Chains")
+										}, 36, 44, .13, 0, "Chains")
 										set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
-										set(HelmetNearRobber, function() {
+										set(Helmet, function() {
 											say([currentMusa(), "Won't touch the thing!"])
-										}, -50, 10, .4, 0, "Helmet")
+										}, -37, 10, .05, -22, "Helmet")
 										set(RobberSword, function() {
 											addToInventory(RobberSword)
-										}, -50, 10, .4, 0, "Sword")
+										}, -40, 15, .2, 100, "Sword")
 									})
 								})
 							} else {
@@ -176,7 +176,7 @@ const state = {
 		set(BamideleDead, function() {
 		}, -5, 25, .5, 0, "Dead guard")
 		set(MusaBound, null, 36, 14, .5, 0)
-		set(Chains, null, 36, 14, .5, 0)
+		set(Chains, null, 36, 24, .13, 0)
 		say([Robber, "Good morning, slave!"])
 	},
 	DesertDay: function() {
