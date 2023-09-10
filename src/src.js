@@ -216,6 +216,9 @@ const state = {
 	DesertEntry: function() {
 		set(DesertEntry)
 		set(Column, function() {
+			shade("Whoaa!", function() {
+				show("Cave")
+			})
 		}, 20, 18, .4)
 		set(MusaBack, null, -20, 16, .5, 0)
 	},
