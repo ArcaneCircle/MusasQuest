@@ -1,7 +1,7 @@
 "use strict"
 
 const state = {
-	scene: "CampNight",
+	scene: "Intro",
 	inventory: [],
 }, scenes = {
 	Intro: function() {
@@ -34,15 +34,22 @@ const state = {
 		set(GreenFruits, function() {
 			say([Musa, "The green are too sour!"])
 		}, 0, 0, 0, 0, "Green fruits")
+		const letsGo = function() {
+			if (state.seer) {
+				shade("And so we travel until…", function() {
+					show("CampNight")
+				})
+			} else {
+				say([Musa, "I should ask the seer first"])
+			}
+		}
 		set(Seer, function() {
 			if (state.seer > 1) {
 				say([
 					Musa, "Where…",
 					Seer, "Bagdad, you should go now or your fate will happen without you.",
 					Musa, "Oh!",
-				], function() {
-					show("DesertNight")
-				})
+				], letsGo)
 			} else if (state.seer == 1) {
 				say([
 					Musa, "Where can I find this silk cloth, again?",
@@ -58,84 +65,103 @@ const state = {
 					Seer, "Hmmm, in a land far far away, there exists a cloth, far thinner and smoother than everything we have ever seen. It's called silk, and it's sold in the streets of Bagdad, a city in the north east, hmmm, but…",
 					Musa, "Yes?",
 					Seer, "…the 13th, oh the 13th can't be a viki…, ah sorry, wrong prophecy, happens, you know? No, no, you get the silk and you're fine!",
-					Musa, "Okay",
+					Musa, "Okay!",
+					Seer, "And, one last thing: to fullfill your fate, you should not kill unless you have no other choice.",
+					Musa, "Good to know.",
 				], function() {
 					state.seer = 1
 				})
 			}
 		}, -37, 12, .5, 0, "Talk to the seer")
-		set(Camel, function() {
-			show("DesertNight")
-		}, 62, 0, .7, 0, "Let's go!")
+		set(Camel, letsGo, -90, 30, 1, 0, "Let's go!")
+		setHotspot(OutOfTown, "Let's go!", letsGo)
+		set(Bamidele, function() {
+			say([Bamidele, "Hurry up!"])
+		}, 45, 20, .55, 0, "Bamidele")
 	},
 	DesertNight: function() {
 		set(DesertNight)
-		set(Camel, null, -10, 12, .2)
-		set(Bamidele, null, -31, 6, .5, 0, "Bamidele, the kings guard")
-		set(Musa, null, 20, 15, .55, 0)
+		set(Camel, function() {
+			show("CampNight")
+		}, -10, 12, .2)
 	},
 	CampNight: function() {
 		set(CampNight)
+		set(Tent, function() {
+			if (!state.scorpion) {
+				say([
+					Musa, "We should deal with this scorpion before we get to sleep!",
+					Bamidele, "I will kill the beast!",
+				])
+			} else {
+				shade("But the night brought other visitors…", function() {
+					show("CampDay")
+				})
+			}
+		}, 0, 0, 1, 0, "Our tent")
 		set(Scorpion, function() {
-			say([
-				Musa, "We should catch it before we got to sleep!",
-				Bamidele, "I will kill the beast!",
-			])
+			say([Musa, "Better keep my distance"])
 		}, -10, 35, .1, 0, "A scorpion")
 		set(Bamidele, function() {
 			if (state.scorpion) {
 				say([
 					Musa, "Let's go to sleep then",
-					Bamidele, "You sleep. I take the first watch.",
-					Bamidele, "And the second.",
-					Musa, "Have fun!",
-				], function() {
-					shade("But the night brought other visitors…", function() {
-						show("CampDay")
+					Bamidele, "You sleep. I take the first watch",
+					Bamidele, "And the second",
+				])
+			} else {
+				say([Musa, "Give me your helmet"], function() {
+					say([
+						Bamidele, "Why?",
+						Musa, "Because I am your prince and I want to catch it!",
+						Bamidele, "Fine, have it",
+					], function() {
+						remove(HelmetOnBamidele)
+						addToInventory(Helmet, function() {
+							if (state.scorpion) {
+								if (state.scene == "CampDay") {
+									say([
+										currentMusa(), "Want a helmet?",
+										Robber, "Give me everything you have!",
+										currentMusa(), "Take it"
+									], function() {
+										removeFromInventory(Helmet)
+										shade("Aaaahhh!", function() {
+											remove(Robber)
+										})
+									})
+								} else {
+									say([currentMusa(), "A scorpion in a helmet"])
+								}
+							} else {
+								remove(Scorpion)
+								state.scorpion = 1
+								say([
+									currentMusa(), "Got you!",
+									Bamidele, "You can keep the helmet"
+								])
+							}
+						})
 					})
 				})
-			} else {
-				say([Musa, [
-					{
-						text: () => "Give me your helmet",
-						action: () => {
-							say([
-								Bamidele, "Why?",
-								Musa, "Because I am your prince and I want to catch it!",
-								Bamidele, "Have it",
-							], function() {
-								HelmetOnBamidele.style.visibility = "hidden"
-								addToInventory(Helmet, function() {
-									if (state.scorpion) {
-										say([currentMusa(), "A scorpion in a helmet"])
-									} else {
-										Scorpion.style.visibility = "hidden"
-										state.scorpion = 1
-										say([currentMusa(), "Got you!"])
-									}
-								})
-							})
-						}
-					},
-					{
-						text: () => "Kill it!",
-						action: () => {
-							shade("Shing!", function() {
-								clear()
-								Scorpion.style.visibility = "hidden"
-							})
-						}
-					},
-				]])
 			}
 		}, -31, 5, .55, 0, "Talk to my Bamidele")
 		set(Musa, null, 35, 14, .5, 0)
 	},
 	CampDay: function() {
 		set(CampDay)
-		set(Bandit, null, -35, -10, .4, 0)
-		set(BamideleDead, null, -5, 25, .5, 0)
+		set(Tent)
+		set(Robber, function() {
+			say([
+				MusaBound, "Excuse me…",
+				Robber, "Silence! I will sell you for a lot of money!",
+				Robber, "Ha ha ha!",
+			])
+		}, -35, -10, .4, 0, "Robber")
+		set(BamideleDead, function() {
+		}, -5, 25, .5, 0, "Dead guard")
 		set(MusaBound, null, 36, 14, .5, 0)
+		say([Robber, "Good morning, slave!"])
 	},
 	DesertDay: function() {
 		set(DesertDay)
@@ -152,7 +178,7 @@ const state = {
 		set(Lamp, function() {
 			set(Jinn, function() {
 				say([Jinn, "The carpet only flies when no one is looking"], function() {
-					Jinn.style.visibility = "hidden"
+					remove(Jinn)
 				})
 			}, 7, 0, .5, 0, "Talk to the Jinn")
 		}, 8, 7, .2, 0, "A golden lamp")
@@ -226,7 +252,8 @@ function updateInventory() {
 	})
 }
 
-function removeOnClick(e) {
+function remove(e) {
+	e.style.visibility = "hidden"
 	const children = e.children
 	for (let i = children.length; i--;) {
 		const e = children[i]
@@ -247,7 +274,7 @@ function removeFromInventory(e) {
 
 function addToInventory(item, f) {
 	if (!state.inventory.includes(item)) {
-		removeOnClick(item)
+		remove(item)
 		item.style.visibility = "hidden"
 		item.use = f
 		state.inventory.push(item)
@@ -371,14 +398,13 @@ function setHotspot(e, m, f) {
 	if (hasTouch) {
 		const children = e.children
 		for (let i = children.length; i--;) {
-			const e = children[i]
-			e.hoverMessage = m
+			children[i].hoverMessage = m
 		}
 	} else {
-		e.onmousemove = function(event) {
+		e.onmousemove = m ? function(event) {
 			info(m)
 			event.stopPropagation()
-		}
+		} : null
 	}
 	if (f) {
 		e.onclick = f
@@ -392,17 +418,12 @@ function set(e, f, x, y, size, deg, hover) {
 	e.style.transformOrigin = `50px 50px`
 	e.style.transform = translate(x, y, size, deg)
 	e.style.visibility = "visible"
-	if (hover) {
-		setHotspot(e, hover)
-	}
+	setHotspot(e, hover)
+	let onclick = null
 	if (f) {
-		const onclick = function(event) {
+		onclick = function(event) {
 			B.talking || f()
 			event.stopPropagation()
-		}, children = e.children
-		for (let i = children.length; i--;) {
-			const child = children[i]
-			child.onclick = onclick
 		}
 		// Add a finger-tip sized hotspot for small targets.
 		if (hasTouch) {
@@ -416,6 +437,10 @@ function set(e, f, x, y, size, deg, hover) {
 			}
 			e.zone = z
 		}
+	}
+	const children = e.children
+	for (let i = children.length; i--;) {
+		children[i].onclick = onclick
 	}
 }
 
