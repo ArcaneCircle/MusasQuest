@@ -132,6 +132,12 @@ const state = {
 									shade("Aaaahhh!", function() {
 										remove(Robber)
 										set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
+										set(HelmetNearRobber, function() {
+											say([currentMusa(), "Won't touch the thing!"])
+										}, -50, 10, .4, 0, "Helmet")
+										set(RobberSword, function() {
+											addToInventory(RobberSword)
+										}, -50, 10, .4, 0, "Sword")
 									})
 								})
 							} else {
