@@ -81,12 +81,6 @@ const state = {
 		}, 45, 20, .55, 0, "Bamidele")
 		set(HelmetOnBamidele, null, 45, 20, .55, 0, "Bamidele")
 	},
-	DesertNight: function() {
-		set(DesertNight)
-		set(Camel, function() {
-			show("CampNight")
-		}, -10, 12, .2)
-	},
 	CampNight: function() {
 		set(CampNight)
 		set(Tent, function() {
