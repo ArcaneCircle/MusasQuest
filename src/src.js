@@ -33,7 +33,7 @@ const state = {
 			say([Musa, "Urgh, the yellow ones make me sick."])
 		}, 0, 0, 0, 0, "Yellow fruits")
 		set(GreenFruits, function() {
-			say([Musa, "The green are too sour!"])
+			say([Musa, "The green ones are too sour!"])
 		}, 0, 0, 0, 0, "Green fruits")
 		const letsGo = function() {
 			if (state.seer) {
@@ -94,7 +94,7 @@ const state = {
 					show("CampDay")
 				})
 			}
-		}, 0, 0, 1, 0, "Our tent")
+		}, 0, 0, 1, 0, "Go to sleep")
 		if (!state.scorpion) {
 			set(Scorpion, function() {
 				say([Musa, "Better keep my distance"])
@@ -110,7 +110,8 @@ const state = {
 			} else {
 				say([
 					Musa, "Any idea how to catch it?",
-					Bamidele, "I would just kill it"
+					Bamidele, "I would just kill it",
+					Musa, "The seer said we should not kill unless necessary",
 				])
 			}
 		}, -31, 5, .55, 0, "Talk to my Bamidele")
@@ -214,8 +215,8 @@ const state = {
 	},
 	DesertEntry: function() {
 		set(DesertEntry)
-		set(Idol, function() {
-		}, 20, 7, .4)
+		set(Column, function() {
+		}, 20, 18, .4)
 		set(MusaBack, null, -20, 16, .5, 0)
 	},
 	Cave: function() {
