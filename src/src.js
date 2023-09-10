@@ -179,12 +179,14 @@ const state = {
 		set(Helmet, function() {
 			say([currentMusa(), "Won't touch the thing!"])
 		}, -37, 10, .05, -22, "Helmet")
-		if (!state.inventory.includes(RobberSword)) {
-			set(RobberSword, function() {
-				addToInventory(RobberSword, function() {
+		if (!state.inventory.includes(Sword)) {
+			set(Sword, function() {
+				addToInventory(Sword, function() {
 					if (!state.unchained) {
 						state.unchained = 1
-						show("CampDead")
+						shade("Clang!", function() {
+							show("CampDead")
+						})
 					} else {
 						noUse()
 					}
@@ -199,7 +201,7 @@ const state = {
 				}, 36, 44, .13, 0, "Chains")
 			}
 			setHotspot(GoDesert, "Continue the journey", function() {
-				show("DesertDay")
+				show("DesertEntry")
 			})
 		} else {
 			set(MusaBound, null, 36, 14, .5, 0)
@@ -232,11 +234,17 @@ const state = {
 		}, 10, 30, .3, 20, "A rug")
 		set(Musa, null, -10, 24, .3, 0)
 	},
-	BeforeCity: function() {
-		set(BeforeCity)
-		set(Crusader, function() {
+	Bagdad: function() {
+		set(Bagdad)
+		set(Mongol, function() {
+			say([Mongol, "Run!"])
 		}, 0, 0, .45)
-		set(MusaBack, null, -31, 17, .5, 0)
+		set(MusaBack, null, -26, 17, .5, 0)
+		say([
+			Mongol, "Badad is no more",
+			Mongol, "Go away or become a part of history!",
+			MusaBack, "Nice meeting you Mongols. Not."
+		])
 	},
 	BeforeCastle: function() {
 		set(BeforeCastle)
