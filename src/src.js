@@ -181,14 +181,26 @@ const state = {
 		}, -37, 10, .05, -22, "Helmet")
 		if (!state.inventory.includes(RobberSword)) {
 			set(RobberSword, function() {
-				addToInventory(RobberSword)
+				addToInventory(RobberSword, function() {
+					if (!state.unchained) {
+						state.unchained = 1
+						show("CampDead")
+					} else {
+						noUse()
+					}
+				})
 			}, -40, 15, .2, 100, "Sword")
 		}
-		set(Musa, null, 36, 14, .5, 0)
-		if (!state.inventory.includes(Chains)) {
-			set(Chains, function() {
-				addToInventory(Chains)
-			}, 36, 44, .13, 0, "Chains")
+		if (state.unchained) {
+			set(Musa, null, 36, 14, .5, 0)
+			if (!state.inventory.includes(Chains)) {
+				set(Chains, function() {
+					addToInventory(Chains)
+				}, 36, 44, .13, 0, "Chains")
+			}
+		} else {
+			set(MusaBound, null, 36, 14, .5, 0)
+			set(Chains, null, 36, 24, .13, 0)
 		}
 	},
 	DesertDay: function() {
@@ -261,6 +273,10 @@ function currentMusa() {
 		dave.style.visibility == "visible")
 }
 
+function noUse() {
+	say([currentMusa(), "This has no use here"])
+}
+
 function updateInventory() {
 	let x = 0
 	state.inventory.forEach(e => {
@@ -273,7 +289,7 @@ function updateInventory() {
 			} else if (e.use) {
 				e.use()
 			} else {
-				say([currentMusa(), "This has no use here"])
+				noUse()
 			}
 		}
 		x += 10
