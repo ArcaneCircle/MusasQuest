@@ -73,7 +73,7 @@ const state = {
 					state.seer = 1
 				})
 			}
-		}, -37, 12, .5, 0, "Talk to the seer")
+		}, -37, 14, .5, 0, "Talk to the seer")
 		set(Camel, letsGo, -90, 30, 1, 0, "Let's go!")
 		setHotspot(OutOfTown, "Let's go!", letsGo)
 		set(Bamidele, function() {
