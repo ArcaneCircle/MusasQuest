@@ -1,70 +1,30 @@
 "use strict"
 
 const state = {
-	scene: "Throne",
+	scene: "CampNight",
 	inventory: [],
 }, scenes = {
-	Throne: function() {
+	Intro: function() {
 		set(Throne)
 		set(King, function() {
-			say([MusaBack, [
-				{
-					text: () => "What quest, father?",
-					action: () => say([King, "Well…"])
-				},
-				{
-					text: () => "Market",
-					action: () => show("Market")
-				},
-				{
-					text: () => "DesertNight",
-					action: () => cutAndShow("A few days later…", "DesertNight")
-				},
-				{
-					text: () => "CampNight",
-					action: () => show("CampNight")
-				},
-				{
-					text: () => "CampDay",
-					action: () => show("CampDay")
-				},
-				{
-					text: () => "DesertDay",
-					action: () => show("DesertDay")
-				},
-				{
-					text: () => "DesertEntry",
-					action: () => show("DesertEntry")
-				},
-				{
-					text: () => "Cave",
-					action: () => show("Cave")
-				},
-				{
-					text: () => "BeforeCity",
-					action: () => show("BeforeCity")
-				},
-				{
-					text: () => "BeforeCastle",
-					action: () => show("BeforeCastle")
-				},
-			]])
-		}, 0, -10, .4, 0, "Talk to the king")
-		set(MusaBack, function() {
-		}, 25, 18, .5, 0, "Me")
-		set(Guard, function() {
-			say([Guard, "At your service, my prince"])
-		}, -26, 5, .5, 0, "A guard")
-		say([
-			King, "Hello my son!",
-			King, "I have a quest for you.",
-		])
+			say([
+				King, "Hello my son!",
+				King, "I sent for you because I have a quest for you!",
+				King, "I need a special gift for your mother, something that does not exist in my kingdom, something precious.",
+				King, "So you will travel strange new lands, and find your mother a gift that will make her proud of you.",
+				King, "Bamidele will go with you, for your protection, and to keep you company.",
+				Bamidele, "I will!",
+				King, "Now go and ask the seer for advice."
+			], function() {
+				show("Market")
+			})
+		}, 0, -10, .4, 0, "The king")
+		set(MusaBack, null, 25, 18, .5)
+		set(Bamidele, null, -26, 5, .5, 0, "Bamidele, the kings guard")
 	},
 	Market: function() {
 		set(Market)
-		set(Musa, null, 31, 15, .55, 0)
-		set(Guard, function() {
-		}, -26, -4, .3, 0, "Talk to my bodyguard")
+		set(Musa, null, 20, 15, .55, 0)
 		set(RedFruits, function() {
 			say([Musa, "These are tasty! I like them!"])
 		}, 0, 0, 0, 0, "Red fruits")
@@ -72,37 +32,109 @@ const state = {
 			say([Musa, "Urgh, the yellow ones make me sick."])
 		}, 0, 0, 0, 0, "Yellow fruits")
 		set(GreenFruits, function() {
-			say([Musa, "Green is nice!"])
+			say([Musa, "The green are too sour!"])
 		}, 0, 0, 0, 0, "Green fruits")
 		set(Seer, function() {
-			say([
-				Musa, "Can you tell me where I can find a gift?",
-				Seer, "Sure! Let me have a look into your future…",
-				Seer, "Hmmmm",
-			])
+			if (state.seer > 1) {
+				say([
+					Musa, "Where…",
+					Seer, "Bagdad, you should go now or your fate will happen without you.",
+					Musa, "Oh!",
+				], function() {
+					show("DesertNight")
+				})
+			} else if (state.seer == 1) {
+				say([
+					Musa, "Where can I find this silk cloth, again?",
+					Seer, "Bagdad, a city in the north east",
+					Musa, "Bagdad! Right!",
+				], function() {
+					++state.seer
+				})
+			} else {
+				say([
+					Musa, "Tell me where I can find something very special, something that doesn't exist around here, for my mother. ",
+					Seer, "Let me have a look into your future…",
+					Seer, "Hmmm, in a land far far away, there exists a cloth, far thinner and smoother than everything we have ever seen. It's called silk, and it's sold in the streets of Bagdad, a city in the north east, hmmm, but…",
+					Musa, "Yes?",
+					Seer, "…the 13th, oh the 13th can't be a viki…, ah sorry, wrong prophecy, happens, you know? No, no, you get the silk and you're fine!",
+					Musa, "Okay",
+				], function() {
+					state.seer = 1
+				})
+			}
 		}, -37, 12, .5, 0, "Talk to the seer")
+		set(Camel, function() {
+			show("DesertNight")
+		}, 62, 0, .7, 0, "Let's go!")
 	},
 	DesertNight: function() {
 		set(DesertNight)
 		set(Camel, null, -10, 12, .2)
+		set(Bamidele, null, -31, 6, .5, 0, "Bamidele, the kings guard")
+		set(Musa, null, 20, 15, .55, 0)
 	},
 	CampNight: function() {
 		set(CampNight)
 		set(Scorpion, function() {
-			say([Musa, "Better keep my distance."])
-		}, -32, 35, .1, 0, "A scorpion")
-		set(Guard, function() {
 			say([
-				Guard, "I will take the first watch",
-				Guard, "And the second",
+				Musa, "We should catch it before we got to sleep!",
+				Bamidele, "I will kill the beast!",
 			])
-		}, -31, 12, .55, 0, "Talk to my bodyguard")
+		}, -10, 35, .1, 0, "A scorpion")
+		set(Bamidele, function() {
+			if (state.scorpion) {
+				say([
+					Musa, "Let's go to sleep then",
+					Bamidele, "You sleep. I take the first watch.",
+					Bamidele, "And the second.",
+					Musa, "Have fun!",
+				], function() {
+					shade("But the night brought other visitors…", function() {
+						show("CampDay")
+					})
+				})
+			} else {
+				say([Musa, [
+					{
+						text: () => "Give me your helmet",
+						action: () => {
+							say([
+								Bamidele, "Why?",
+								Musa, "Because I am your prince and I want to catch it!",
+								Bamidele, "Have it",
+							], function() {
+								HelmetOnBamidele.style.visibility = "hidden"
+								addToInventory(Helmet, function() {
+									if (state.scorpion) {
+										say([currentMusa(), "A scorpion in a helmet"])
+									} else {
+										Scorpion.style.visibility = "hidden"
+										state.scorpion = 1
+										say([currentMusa(), "Got you!"])
+									}
+								})
+							})
+						}
+					},
+					{
+						text: () => "Kill it!",
+						action: () => {
+							shade("Shing!", function() {
+								clear()
+								Scorpion.style.visibility = "hidden"
+							})
+						}
+					},
+				]])
+			}
+		}, -31, 5, .55, 0, "Talk to my Bamidele")
 		set(Musa, null, 35, 14, .5, 0)
 	},
 	CampDay: function() {
 		set(CampDay)
 		set(Bandit, null, -35, -10, .4, 0)
-		set(GuardDead, null, -5, 25, .5, 0)
+		set(BamideleDead, null, -5, 25, .5, 0)
 		set(MusaBound, null, 36, 14, .5, 0)
 	},
 	DesertDay: function() {
@@ -143,9 +175,32 @@ const state = {
 		}, 0, 0, .45)
 		set(MusaBack, null, -31, 17, .5, 0)
 	},
+	Home: function() {
+		set(Throne)
+		set(King, null, 0, -10, .4)
+		set(MusaBack, null, 25, 18, .5)
+		say([
+			MusaBack, "I'm home! And I have the gift you asked for!",
+			King, "Wonderful! But the gift is having you back, and as the man that you need to be to follow me.",
+			King, "Now, you saw the world, and found your place in it.",
+			MusaBack, "I have.",
+		], function() {
+			M.innerHTML = "The End"
+			M.style.display = "block"
+		})
+	},
 }, zones = []
 
 let centerX, centerY, hasTouch
+
+function shade(m, f) {
+	M.innerHTML = m
+	M.style.display = "block"
+	setTimeout(function() {
+		M.style.display = "none"
+		f && f()
+	}, 1000 + 200 * m.split(' ').length)
+}
 
 function currentMusa() {
 	return [Musa, MusaBack, MusaBound].find(dave =>
@@ -178,6 +233,10 @@ function removeOnClick(e) {
 		e.onclick = null
 	}
 	e.onclick = null
+	if (e.zone) {
+		e.zone.style.visibility = "hidden"
+		e.zone = null
+	}
 }
 
 function removeFromInventory(e) {
@@ -308,7 +367,7 @@ function info(m) {
 	I.innerHTML = typeof m == "string" ? m : "&nbsp;"
 }
 
-function setHotspot(e, m) {
+function setHotspot(e, m, f) {
 	if (hasTouch) {
 		const children = e.children
 		for (let i = children.length; i--;) {
@@ -320,6 +379,9 @@ function setHotspot(e, m) {
 			info(m)
 			event.stopPropagation()
 		}
+	}
+	if (f) {
+		e.onclick = f
 	}
 }
 
@@ -352,6 +414,7 @@ function set(e, f, x, y, size, deg, hover) {
 			if (hover) {
 				z.hoverMessage = hover
 			}
+			e.zone = z
 		}
 	}
 }
@@ -362,20 +425,11 @@ function show(name) {
 	resetZones()
 	for (const e of S.getElementsByTagName("g")) {
 		e.style.visibility = "hidden"
-		e.onclick = null
+		e.zone = e.onclick = null
 	}
 	state.scene = name
 	scenes[name]()
 	updateInventory()
-}
-
-function cutAndShow(m, name) {
-	M.innerHTML = m
-	M.style.display = "block"
-	setTimeout(function() {
-		M.style.display = "none"
-		show(name)
-	}, 1000 + 200 * m.split(' ').length)
 }
 
 function resize() {

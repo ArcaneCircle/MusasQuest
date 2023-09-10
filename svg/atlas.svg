@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" x1="360" y1="1916" x2="360" y2="1940" id="gradient-2" gradientTransform="matrix(1, 0, 0, 0.801344, 0, 412.683411)">
+<stop offset="0" style="stop-color: rgba(186, 139, 64, 1)"/>
+<stop offset="1" style="stop-color: rgba(110, 82, 38, 1)"/>
+</linearGradient>
+</defs>
 <rect width="100" height="100" style="fill: rgb(187, 139, 64);" y="-110" x="220"/>
 <path d="M 237 -23 L 303 -23 L 307 -17 L 233 -17 L 237 -23 Z" style="fill: rgb(108, 74, 23);"/>
 <path d="M 241 -41 L 299 -41 L 303 -35 L 237 -35 L 241 -41 Z" style="fill: rgb(151, 6, 6);"/>
@@ -26,8 +32,6 @@
 <rect width="300" height="300" style="fill: rgb(15, 32, 65);" y="840" x="-100"/>
 <path d="M -100 1010 L 16 998 L 53 1001 L 91 995 L 200 1009 L 200 1140 L -100 1140 L -100 1010 Z" style="fill: rgb(8, 19, 38);"/>
 <path d="M -100 1007 C -62 1001 157 1013 200 1011 L 200 1140 L -100 1140 L -100 1007 Z" style="fill: rgb(118, 89, 39);"/>
-<rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="1770" x="210"/>
-<circle style="fill: rgb(248, 227, 28);" cx="389" cy="1876" r="4"/>
 <rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="530" x="-100"/>
 <rect width="300" height="170" style="fill: rgb(186, 139, 64);" y="660" x="-100"/>
 <path style="fill: rgb(109, 74, 23);" d="M -100 679 L 58 674 L 200 678 L 200 656 L 58 657 L -100 654 L -100 679 Z"/>
@@ -204,8 +208,6 @@
 <path style="fill: rgb(239, 239, 239);" d="M 1513 57 L 1513 68 L 1517 68 L 1516 57 L 1521 57 L 1521 54 L 1516 54 L 1516 48 L 1513 48 L 1513 54 L 1508 54 L 1508 57 L 1513 57 Z"/>
 <ellipse style="fill: rgb(176, 9, 10);" cx="490" cy="90" rx="14" ry="6"/>
 <ellipse style="fill: rgb(199, 9, 8);" cx="490" cy="89" rx="11" ry="4"/>
-<path d="M 210 1925 L 325 1908 L 354 1922 L 401 1917 L 510 1940 L 510 2070 L 210 2070 L 210 1925 Z" style="fill: rgb(36, 78, 155);"/>
-<path d="M 210 1917 C 271 1902 392 1958 510 1935 L 510 2070 L 210 2070 L 210 1917 Z" style="fill: rgb(185, 139, 64);"/>
 <rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="1770" x="-100"/>
 <path d="M -100 1915 L 17 1902 L 40 1908 L 91 1902 L 200 1926 L 200 2070 L -100 2070 L -100 1915 Z" style="fill: rgb(36, 78, 155);"/>
 <path d="M -100 1907 C -39 1892 77 1925 200 1919 L 200 2070 L -100 2070 L -100 1907 Z" style="fill: rgb(185, 139, 64);"/>
@@ -281,8 +283,8 @@
 <path style="fill: rgb(199, 9, 8); transform-origin: 561.517px -154.212px;" d="M 553 -151 L 558 -146 L 569 -150 L 571 -156 L 567 -159 L 559 -159 L 553 -155 L 553 -151 Z"/>
 <path style="fill: rgb(223, 210, 179); transform-origin: 565.017px -143.712px;" d="M 559 -136 L 557 -148 L 561 -152 L 568 -153 L 574 -141 L 571 -134 L 567 -137 L 564 -130 L 559 -136 Z"/>
 <path style="fill: rgb(112, 76, 22); transform-origin: 564.017px -146.212px;" d="M 563 -148 L 559 -147 L 560 -141 L 564 -145 L 570 -145 L 567 -150 L 563 -148 Z"/>
-<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="660" y="-220"/>
-<path style="transform-origin: 705.017px -163.712px; fill: rgb(101, 101, 101);" d="M 707 -154 L 693 -160 L 696 -173 L 708 -184 L 707 -154 Z"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="990" y="-220"/>
+<path style="fill: rgb(101, 101, 101); transform-origin: 1035.02px -163.712px;" d="M 1037 -154 L 1023 -160 L 1026 -173 L 1038 -184 L 1037 -154 Z"/>
 <rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="1210"/>
 <path style="fill: rgb(151, 7, 5); transform-origin: 1259px 82.2575px;" d="M 1223 72 C 1237 56 1261 77 1289 69 C 1294 67 1302 86 1298 88 C 1261 98 1248 75 1227 93 C 1223 93 1220 75 1223 72 Z"/>
 <path style="fill: rgb(199, 9, 8); transform-origin: 1259.1px 82.0255px;" d="M 1224 72 C 1237 57 1262 77 1288 70 C 1293 68 1300 86 1296 87 C 1262 97 1247 74 1227 91 C 1224 91 1221 74 1224 72 Z"/>
@@ -290,9 +292,7 @@
 <path style="fill: rgb(113, 77, 21);" d="M 1283 79 L 1287 82 L 1289 78 L 1285 77 L 1283 79 Z"/>
 <path style="fill: rgb(223, 210, 179);" d="M 1268 25 L 1274 30 L 1269 34 L 1268 44 L 1273 51 L 1272 70 L 1285 67 L 1288 74 L 1282 83 L 1271 84 L 1264 82 L 1261 73 L 1259 54 L 1260 47 L 1258 39 L 1261 29 L 1268 25 Z"/>
 <path style="fill: rgb(113, 77, 21);" d="M 1262 53 L 1262 71 L 1275 81 L 1280 85 L 1279 81 L 1281 79 L 1277 79 L 1267 69 L 1270 54 L 1266 51 L 1262 53 Z"/>
-<path style="transform-origin: 705.017px -163.712px; fill: rgb(216, 216, 216);" d="M 707 -154 L 708 -184 L 721 -173 L 725 -159 L 707 -154 Z"/>
-<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="660" y="-330"/>
-<path style="fill: rgb(101, 101, 101);" d="M 707 -264 L 693 -270 L 696 -283 L 708 -294 L 721 -283 L 725 -269 L 707 -264 Z"/>
+<path style="fill: rgb(216, 216, 216); transform-origin: 1035.02px -163.712px;" d="M 1037 -154 L 1038 -184 L 1051 -173 L 1055 -159 L 1037 -154 Z"/>
 <path style="fill: rgb(101, 101, 101);" d="M 567 -73 L 562 -71 L 557 -70 L 557 -74 L 560 -78 L 564 -76 L 567 -73 Z"/>
 <path style="fill: rgb(69, 69, 69);" d="M 567 -73 L 562 -71 L 557 -70 L 561 -73 L 567 -73 Z"/>
 <path style="fill: rgb(72, 49, 14);" d="M 41 682 L 52 683 L 53 684 L 39 683 L 41 682 Z"/>
@@ -323,7 +323,6 @@
 <path style="fill: rgb(223, 210, 179);" d="M 26 1302 L 36 1291 C 41 1294 49 1290 62 1288 L 45 1308 L 26 1302 Z"/>
 <circle style="fill: rgb(255, 255, 255);" cx="88" cy="1264" r="6"/>
 <circle style="fill: rgb(14, 33, 65);" cx="85" cy="1266" r="6"/>
-<path d="M -310 1870 L -210 1870 L -210 1970 L -310 1970 L -310 1870 Z M -410 2070 L -110 2070 L -110 1770 L -410 1770 L -410 2070 Z" style="fill: rgba(0, 0, 0, 0.78);"/>
 <rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="990"/>
 <path style="fill: rgb(70, 47, 15);" d="M 1047 90 L 1045 96 L 1061 93 L 1047 90 Z"/>
 <path d="M 1009 84 L 1015 35 L 1035 20 L 1058 35 L 1061 93 L 1009 84 Z" style="fill: rgb(216, 216, 216);"/>
@@ -347,4 +346,22 @@
 <path style="fill: rgb(111, 75, 22);" d="M 1512 -37 L 1441 -38 L 1446 -39 L 1512 -39 L 1520 -39 L 1520 -37 L 1512 -37 Z"/>
 <path style="fill: rgb(223, 210, 179);" d="M 1520 -39 L 1512 -39 L 1516 -42 L 1521 -42 L 1520 -39 Z"/>
 <path style="fill: rgb(111, 75, 22);" d="M 1512 -57 L 1441 -58 L 1446 -59 L 1512 -59 L 1516 -61 L 1521 -61 L 1520 -58 L 1521 -55 L 1516 -55 L 1512 -57 Z"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="550" y="-440"/>
+<path style="fill: rgb(101, 101, 101); transform-origin: 592.102px -378.836px;" d="M 634 -369 L 568 -369 L 575 -395 L 601 -416 L 627 -395 L 634 -369 Z"/>
+<ellipse style="fill: rgb(69, 69, 69);" cx="601" cy="-369" rx="33" ry="5"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="990" y="-330"/>
+<path style="fill: rgb(70, 47, 15);" d="M 1047 -240 L 1045 -234 L 1061 -237 L 1047 -240 Z"/>
+<path d="M 1009 -246 L 1015 -295 L 1035 -310 L 1058 -295 L 1061 -237 L 1009 -246 Z" style="fill: rgb(216, 216, 216);"/>
+<path d="M 1067 -297 L 1047 -310 L 1035 -310 L 1058 -295 L 1061 -237 L 1071 -241 L 1067 -297 Z" style="fill: rgb(101, 101, 101);"/>
+<path style="transform-box: fill-box; transform-origin: 50% 50%; fill: rgb(101, 101, 101);" d="M 1022 -277 L 1027 -276 L 1034 -278 L 1030 -276 L 1034 -275 L 1042 -277 L 1036 -274 L 1039 -274 L 1047 -275 L 1042 -273 L 1046 -270 L 1055 -271 L 1056 -261 C 1056 -261 1051 -267 1051 -267 C 1051 -268 1045 -267 1045 -267 L 1042 -264 L 1044 -259 L 1052 -258 L 1041 -255 L 1039 -263 L 1035 -266 L 1030 -258 L 1032 -268 L 1030 -269 L 1026 -261 L 1028 -270 L 1026 -272 L 1021 -266 L 1024 -273 L 1018 -277 L 1017 -285 L 1027 -292 L 1042 -282 L 1026 -285 L 1021 -283 L 1022 -277 Z" transform="matrix(0, -1, 1, 0, 0.000012, 0.00003)"/>
+<rect width="100" height="100" style="fill: rgb(187, 139, 64);" x="770" y="-110"/>
+<path style="fill: rgb(72, 49, 14);" d="M 787 -66 L 796 -64 L 807 -67 L 801 -63 L 807 -62 L 820 -66 L 811 -61 L 801 -52 L 793 -39 L 797 -54 L 793 -57 L 785 -47 L 790 -59 L 781 -65 L 779 -79 L 796 -90 L 820 -74 L 793 -79 L 785 -76 L 787 -66 Z"/>
+<path style="fill: rgb(72, 49, 14);" d="M 824 -50 L 835 -60 L 850 -62 L 840 -58 L 847 -53 L 862 -55 L 864 -38 C 864 -38 856 -48 856 -49 C 856 -50 845 -49 845 -49 L 840 -44 L 844 -35 L 857 -34 L 839 -29 L 836 -42 L 829 -47 L 820 -33 L 824 -50 Z"/>
+<path d="M -310 1870 L -210 1870 L -210 1970 L -310 1970 L -310 1870 Z M -410 2070 L -110 2070 L -110 1770 L -410 1770 L -410 2070 Z" style="fill: rgba(0, 0, 0, 0.78);"/>
+<rect width="300" height="300" style="fill: rgb(59, 127, 255);" y="1770" x="210"/>
+<circle style="fill: rgb(248, 227, 28);" cx="389" cy="1876" r="4"/>
+<path d="M 210 1925 L 325 1908 L 354 1922 L 401 1917 L 510 1940 L 510 2070 L 210 2070 L 210 1925 Z" style="fill: rgb(36, 78, 155);"/>
+<path d="M 210 1917 C 271 1902 392 1958 510 1935 L 510 2070 L 210 2070 L 210 1917 Z" style="fill: rgb(185, 139, 64);"/>
+<rect width="100" height="19" style="fill: url('#gradient-2');" y="1948" x="310"/>
+<path d="M 320 1946 L 210 1946 L 210 2070 L 510 2070 L 510 1946 L 400 1946 L 360 1966 L 320 1946 Z" style="fill: rgb(186, 139, 64);"/>
 </svg>
