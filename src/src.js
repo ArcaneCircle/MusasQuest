@@ -131,6 +131,11 @@ const state = {
 									removeFromInventory(Helmet)
 									shade("Aaaahhh!", function() {
 										remove(Robber)
+										remove(MusaBound)
+										set(Musa, null, 36, 14, .5, 0)
+										set(Chains, function() {
+											addToInventory(Chains)
+										}, 36, 32, .5, 0, "Chains")
 										set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
 										set(HelmetNearRobber, function() {
 											say([currentMusa(), "Won't touch the thing!"])
@@ -171,6 +176,7 @@ const state = {
 		set(BamideleDead, function() {
 		}, -5, 25, .5, 0, "Dead guard")
 		set(MusaBound, null, 36, 14, .5, 0)
+		set(Chains, null, 36, 14, .5, 0)
 		say([Robber, "Good morning, slave!"])
 	},
 	DesertDay: function() {
@@ -258,7 +264,7 @@ function updateInventory() {
 				say([currentMusa(), "This has no use here"])
 			}
 		}
-		x += 35
+		x += 10
 	})
 }
 
