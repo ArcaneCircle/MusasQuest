@@ -131,6 +131,7 @@ const state = {
 									removeFromInventory(Helmet)
 									shade("Aaaahhh!", function() {
 										remove(Robber)
+										set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
 									})
 								})
 							} else {
