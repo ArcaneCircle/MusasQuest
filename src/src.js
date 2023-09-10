@@ -198,6 +198,9 @@ const state = {
 					addToInventory(Chains)
 				}, 36, 44, .13, 0, "Chains")
 			}
+			setHotspot(GoDesert, "Continue the journey", function() {
+				show("DesertDay")
+			})
 		} else {
 			set(MusaBound, null, 36, 14, .5, 0)
 			set(Chains, null, 36, 24, .13, 0)
