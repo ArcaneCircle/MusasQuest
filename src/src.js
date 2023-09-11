@@ -164,9 +164,9 @@ const state = {
 				Robber, "Silence! I will sell you for a lot of money!",
 				Robber, "Ha ha ha!",
 			])
-		}, -35, -10, .4, 0, "Robber")
-		set(BamideleDead, function() {
-		}, -5, 25, .5, 0, "Dead guard")
+		}, -32, -10, .4, 0, "Robber")
+		set(BamideleDead, null, -5, 25, .5, 0, "Dead guard")
+		set(BamideleTurban, null, -5, 25, .5, 0, "Dead guard")
 		set(MusaBound, null, 36, 14, .5, 0)
 		set(Chains, null, 36, 24, .13, 0)
 		say([Robber, "Good morning, slave!"])
@@ -174,12 +174,25 @@ const state = {
 	CampDead: function() {
 		set(CampDay)
 		set(Tent)
-		set(BamideleDead, function() {
-		}, -5, 25, .5, 0, "Dead guard")
-		set(RobberDead, null, -50, 10, .4, 0, "Dead robber")
+		set(BamideleDead, null, -5, 25, .5, 0, "Dead guard")
+		if (!state.inventory.includes(TurbanRope)) {
+			set(BamideleTurban, function() {
+				if (state.lookForRope) {
+					say([Musa, "That will do!"])
+					remove(BamideleTurban)
+					addToInventory(TurbanRope, function() {
+						if (state.scene == "TempleEntry") {
+							removeFromInventory(TurbanRope)
+							show("Temple")
+						}
+					})
+				}
+			}, -5, 25, .5, 0, state.lookForRope ? "Turban" : "Dead guard")
+		}
+		set(RobberDead, null, -50, 14, .4, 0, "Dead robber")
 		set(Helmet, function() {
 			say([currentMusa(), "Won't touch the thing!"])
-		}, -37, 10, .05, -22, "Helmet")
+		}, -37, 14, .05, -22, "Helmet")
 		if (!state.inventory.includes(Sword)) {
 			set(Sword, function() {
 				addToInventory(Sword, function() {
@@ -192,7 +205,7 @@ const state = {
 						noUse()
 					}
 				})
-			}, -40, 15, .2, 100, "Sword")
+			}, -40, 19, .2, 100, "Sword")
 		}
 		if (state.unchained) {
 			set(Musa, null, 36, 14, .5, 0)
@@ -201,29 +214,36 @@ const state = {
 					addToInventory(Chains)
 				}, 36, 44, .13, 0, "Chains")
 			}
-			setHotspot(GoDesert, "Continue the journey", function() {
-				show("DesertEntry")
-			})
 		} else {
-			set(MusaBound, null, 36, 14, .5, 0)
-			set(Chains, null, 36, 24, .13, 0)
+			set(MusaBound, null, 36, 13, .5, 0)
+			set(Chains, null, 36, 23, .13, 0)
 		}
+		set(ColumnDistant, function() {
+			if (state.unchained) {
+				show("TempleEntry")
+			} else {
+				say([MusaBound, "Have to free myself first"])
+			}
+		}, -40, -3, .06, 0, "Something in the distance")
 	},
-	DesertDay: function() {
-		set(DesertDay)
-		set(Musa, null, 31, 16, .5, 0)
-	},
-	DesertEntry: function() {
-		set(DesertEntry)
+	TempleEntry: function() {
+		set(TempleEntry)
 		set(Column, function() {
-			shade("Whoaa!", function() {
-				show("Cave")
-			})
-		}, 20, 18, .4)
-		set(MusaBack, null, -20, 16, .5, 0)
+			if (state.inventory.includes(TurbanRope)) {
+				removeFromInventory(TurbanRope)
+				show("Temple")
+			} else {
+				state.lookForRope = 1
+				say([Musa, "I need a rope to get down there"])
+			}
+		}, 26, 22, .4, 0, "An opening to a buried temple")
+		set(Tent, function() {
+			show("CampDead")
+		}, -43, 6, .2, 0, "Back to the camp")
+		set(Musa, null, -20, 12, .5, 0)
 	},
-	Cave: function() {
-		set(Cave)
+	Temple: function() {
+		set(Temple)
 		set(Lamp, function() {
 			set(Jinn, function() {
 				say([Jinn, "The carpet only flies when no one is looking"], function() {
