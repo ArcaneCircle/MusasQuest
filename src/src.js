@@ -1,7 +1,7 @@
 "use strict"
 
 const state = {
-	scene: "Temple",
+	scene: "Intro",
 	inventory: [],
 }, scenes = {
 	Intro: function() {
@@ -371,7 +371,7 @@ const state = {
 				])
 				state.bagdad = 1
 			}
-		}, 0, 0, .45)
+		}, 0, 0, .45, 0, "Mongol")
 		set(MusaBack, null, -26, 17, .5, 0)
 		if (!state.firstTimeBagdad) {
 			say([MusaBack, "Well, this carpet is fast!"])
@@ -381,8 +381,12 @@ const state = {
 	Byzantine: function() {
 		set(Byzantine)
 		set(Crusader, function() {
-		}, 0, 0, .45)
-		set(MusaBack, null, -31, 17, .5, 0)
+			say([Crusader, "What's your desire?"])
+		}, -21, 11, .5, 0, "A crusader")
+		set(MusaBack, null, 35, 18, .5, 0)
+		setHotspot(Enter, "Enter Byzantine", function() {
+			say([Crusader, "Not so fast!"])
+		})
 	},
 	Home: function() {
 		state.inventory.length = 0
