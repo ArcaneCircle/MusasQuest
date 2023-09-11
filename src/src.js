@@ -1,7 +1,7 @@
 "use strict"
 
 const state = {
-	scene: "Intro",
+	scene: "Temple",
 	inventory: [],
 }, scenes = {
 	Intro: function() {
@@ -244,39 +244,149 @@ const state = {
 	},
 	Temple: function() {
 		set(Temple)
+		set(TempleFront)
 		set(Lamp, function() {
 			set(Jinn, function() {
-				say([Jinn, "The carpet only flies when no one is looking"], function() {
-					remove(Jinn)
-				})
-			}, 7, 0, .5, 0, "Talk to the Jinn")
-		}, 8, 7, .2, 0, "A golden lamp")
-		set(Rug, function() {
-			addToInventory(Rug, function() {
-				say([currentMusa(), "I don't know how"])
+				say([Musa, [
+					{
+						text: () => state.real
+							? null
+							: "Are you real?",
+						action: () => {
+							say([Jinn, "As real as you are"])
+							state.real = 1
+						}
+					},
+					{
+						text: () => state.wishes
+							? null
+							: "Do I have three wishes?",
+						action: () => {
+							say([Jinn, "I'm not that kind of Jinn, sorry"])
+							state.wishes = 1
+						}
+					},
+					{
+						text: () => state.inventory.includes(Carpet)
+							? "How do I use the carpet?"
+							: "How do I get to Bagdad?",
+						action: () => {
+							if (state.inventory.includes(Carpet)) {
+								say([
+									Jinn, "The carpet only flies when noone is looking",
+									Musa, "Hmmm",
+								])
+								state.howToSteer = 1
+							} else {
+								say([
+									Jinn, "I would take the flying carpet here",
+									Musa, "Oh!"
+								])
+							}
+						}
+					},
+					{
+						text: () => state.howToSteer
+							? "How do I steer the carpet?"
+							: null,
+						action: () => {
+							say([
+								Jinn, "Just tell it where to go",
+								Musa, "Bagdad!",
+								Jinn, "Someone is still looking…"
+							], function() {
+								window.onblur = function() {
+									if (state.inventory.includes(Carpet)) {
+										fly("Bagdad")
+										state.carpetUsed = 1
+										window.onblur = null
+									}
+								}
+							})
+						}
+					},
+				]])
+			}, 11, 0, .5, 0, "Talk to the Jinn")
+			if (state.jinn) {
+				say([Jinn, "How can I help you?"])
+			} else {
+				state.jinn = 1
+				say([
+					Jinn, "Hello my friend!",
+					Musa, "Whoaa!",
+				])
+			}
+		}, 12, 7, .2, 0, "A golden lamp")
+		set(Carpet, function() {
+			addToInventory(Carpet, function() {
+				if (state.carpetUsed) {
+					say([currentMusa(), [
+						{
+							text: () => state.scene != "Bagdad" ? "Bagdad" : null,
+							action: () => {
+								fly("Bagdad")
+							}
+						},
+						{
+							text: () => state.byzantine && state.scene != "Byzantine" ? "Byzantine" : null,
+							action: () => {
+								fly("Byzantine")
+							}
+						},
+						{
+							text: () => "Home",
+							action: () => {
+								if (state.inventory.includes(Silk)) {
+									fly("Home")
+								} else {
+									say([currentMusa(), "I can't go home without the silk"])
+								}
+							}
+						},
+					]])
+				} else {
+					say([currentMusa(), "I don't know how"])
+				}
 			})
-		}, 10, 30, .3, 20, "A rug")
-		set(Musa, null, -10, 24, .3, 0)
+			say([Musa, "Got a carpet, need a house!"])
+		}, 10, 28, .3, 20, "A carpet")
+		set(Musa, null, -12, 20, .4, 0)
 	},
 	Bagdad: function() {
 		set(Bagdad)
 		set(Mongol, function() {
-			say([Mongol, "Run!"])
+			if (state.byzantine) {
+				say([Mongol, "I said we meet in Byzantine or should I chop your ugly head off right now?!"])
+			} else if (state.bagdad) {
+				say([
+					MusaBack, "But where can I find silk then?",
+					Mongol, "Try Byzantine, ha ha ha!",
+					Mongol, "I will meet you there…",
+				])
+				state.byzantine = 1
+			} else {
+				say([
+					MusaBack, "Is this Bagdad?",
+					Mongol, "Bagdad, and everything in it, belongs to us Mongols now!"
+				])
+				state.bagdad = 1
+			}
 		}, 0, 0, .45)
 		set(MusaBack, null, -26, 17, .5, 0)
-		say([
-			Mongol, "Badad is no more",
-			Mongol, "Go away or become a part of history!",
-			MusaBack, "Nice meeting you Mongols. Not."
-		])
+		if (!state.firstTimeBagdad) {
+			say([MusaBack, "Well, this carpet is fast!"])
+			state.firstTimeBagdad = 1
+		}
 	},
-	BeforeCastle: function() {
-		set(BeforeCastle)
-		set(Tuck, function() {
+	Byzantine: function() {
+		set(Byzantine)
+		set(Crusader, function() {
 		}, 0, 0, .45)
 		set(MusaBack, null, -31, 17, .5, 0)
 	},
 	Home: function() {
+		state.inventory.length = 0
+		updateInventory()
 		set(Throne)
 		set(King, null, 0, -10, .4)
 		set(MusaBack, null, 25, 18, .5)
@@ -286,6 +396,7 @@ const state = {
 			King, "Now, you saw the world, and found your place in it.",
 			MusaBack, "I have.",
 		], function() {
+			M.onclick = null
 			M.innerHTML = "The End"
 			M.style.display = "block"
 		})
@@ -297,10 +408,17 @@ let centerX, centerY, hasTouch
 function shade(m, f) {
 	M.innerHTML = m
 	M.style.display = "block"
-	setTimeout(function() {
+	M.onclick = function() {
 		M.style.display = "none"
 		f && f()
-	}, 1000 + 200 * m.split(' ').length)
+	}
+	setTimeout(M.onclick, 1000 + 200 * m.split(' ').length)
+}
+
+function fly(to) {
+	shade("Woooooooosh!", function() {
+		show(to)
+	})
 }
 
 function currentMusa() {
