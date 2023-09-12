@@ -726,7 +726,7 @@ function setHotspot(e, m, f) {
 }
 
 function set(e, f, x, y, size, deg, hover) {
-	size ||= 1
+	size = size || 1
 	// Transform origin at runtime to keep sprite coordinates in the
 	// 0-99 range. If the source is centered at 0/0, there are minus
 	// signs that make the values a tiny bit worse to compress.
