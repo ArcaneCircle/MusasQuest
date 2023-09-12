@@ -342,7 +342,7 @@ const state = {
 						},
 						{
 							text: () => state.byzantine &&
-									state.scene != "Byzantium"
+									!state.scene.startsWith("Byzantium")
 								? "Byzantium"
 								: null,
 							action: () => {
