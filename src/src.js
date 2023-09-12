@@ -37,7 +37,7 @@ const state = {
 		}, 3, 10, 0, 0, "Green fruits")
 		const letsGo = function() {
 			if (state.seer) {
-				shade("And so we travel until…", function() {
+				shade("A few days later", function() {
 					show("CampNight")
 				})
 			} else {
@@ -63,9 +63,10 @@ const state = {
 				say([
 					Musa, "Tell me where I can find something very special, something that doesn't exist around here, for my mother. ",
 					Seer, "Let me have a look into your future…",
-					Seer, "Hmmm, in a land far far away, there exists a cloth, far thinner and smoother than everything we have ever seen. It's called silk, and it's sold in the streets of Bagdad, a city in the north east, hmmm, but…",
+					Seer, "Hmmm, in a land far, far away, there exists a cloth, far thinner and smoother than everything we have ever seen. It's called silk, and it's sold in the streets of Bagdad, a city far away north east, hmmm…",
+					Seer, "On your journey the gods will test you many times. Once, twice, but the 13th…",
 					Musa, "Yes?",
-					Seer, "…the 13th, oh the 13th can't be a viki…, ah sorry, wrong prophecy, happens, you know? No, no, you get the silk and you're fine!",
+					Seer, "…the 13th cannot be a Vikin…, ah sorry, wrong prophecy, happens, you know, no, no, you get the silk and you're fine!",
 					Musa, "Okay!",
 					Seer, "And, one last thing: to fullfill your fate, you should not kill unless you have no other choice.",
 					Musa, "Good to know.",
@@ -87,6 +88,7 @@ const state = {
 				say([
 					Musa, "We should deal with this scorpion before we get to sleep!",
 					Bamidele, "I will kill the beast!",
+					Musa, "The seer said we should not kill unless necessary"
 				])
 			} else {
 				shade("But the night brought other visitors…", function() {
@@ -119,7 +121,7 @@ const state = {
 				say([Musa, "Give me your helmet"], function() {
 					say([
 						Bamidele, "Why?",
-						Musa, "Because I am your prince and I want to catch it!",
+						Musa, "Because I want to catch it!",
 						Bamidele, "Fine, have it",
 					], function() {
 						remove(HelmetOnBamidele)
@@ -164,19 +166,23 @@ const state = {
 				Robber, "Ha ha ha!",
 			])
 		}, -32, -10, .4, 0, "Robber")
-		set(BamideleDead, null, -5, 25, .5, 0, "Dead guard")
-		set(BamideleTurban, null, -25, 16, .5, 0, "Dead guard")
+		set(BamideleDead, null, -5, 25, .5, 0, "Dead Bamidele")
+		set(BamideleTurban, null, -25, 16, .5, 0, "Dead Bamidele")
 		set(MusaBound, null, 36, 14, .5, 0)
 		set(Chains, null, 36, 24, .13, 0)
 		if (!state.morning) {
 			state.morning = 1
-			say([Robber, "Good morning, slave!"])
+			say([
+				Robber, "Good morning, slave!",
+				MusaBound, "Poor Bamidele…",
+				Robber, "He's ventured too far! Ha ha ha!"
+			])
 		}
 	},
 	CampDead: function() {
 		set(CampDay)
 		set(Tent)
-		set(BamideleDead, null, -5, 25, .5, 0, "Dead guard")
+		set(BamideleDead, null, -5, 25, .5, 0, "Dead Bamidele")
 		if (!state.inventory.includes(TurbanRope)) {
 			set(BamideleTurban, function() {
 				if (state.lookForRope) {
@@ -191,7 +197,7 @@ const state = {
 						}
 					})
 				}
-			}, -25, 16, .5, 0, state.lookForRope ? "Turban" : "Dead guard")
+			}, -25, 16, .5, 0, state.lookForRope ? "Turban" : "Dead Bamidele")
 		}
 		set(RobberDead, null, -50, 14, .4, 0, "Dead robber")
 		set(Helmet, function() {
@@ -212,6 +218,7 @@ const state = {
 						state.unchained = 1
 						shade("Clang!", function() {
 							show("CampDead")
+							say([Musa, "Free again!"])
 						})
 					} else {
 						noUse()
@@ -335,11 +342,11 @@ const state = {
 						},
 						{
 							text: () => state.byzantine &&
-									state.scene != "Byzantine"
-								? "Byzantine"
+									state.scene != "Byzantium"
+								? "Byzantium"
 								: null,
 							action: () => {
-								fly("Byzantine")
+								fly("Byzantium")
 							}
 						},
 						{
@@ -367,11 +374,14 @@ const state = {
 		set(Bagdad)
 		set(Mongol, function() {
 			if (state.byzantine) {
-				say([Mongol, "I said we meet in Byzantine or should I chop your ugly head off right now?!"])
+				say([
+					Mongol, "I said we meet in Byzantium or should I chop your ugly head off right now?!",
+					MusaBack, "Better wait until Byzantium if you don't mind"
+				])
 			} else if (state.bagdad) {
 				say([
 					MusaBack, "But where can I find silk now?",
-					Mongol, "Try Byzantine, ha ha ha!",
+					Mongol, "Try Byzantium, ha ha ha!",
 					Mongol, "I will meet you there…",
 				])
 				state.byzantine = 1
@@ -401,13 +411,9 @@ const state = {
 		if (!state.inventory.includes(A3)) {
 			set(A3, () => takeArrow(A3), 40, 28, .2, -15, "Broken Arrow")
 		}
-		if (!state.firstTimeBagdad) {
-			say([MusaBack, "Parked the carpet outside of view"])
-			state.firstTimeBagdad = 1
-		}
 	},
-	Byzantine: function() {
-		set(Byzantine)
+	Byzantium: function() {
+		set(Byzantium)
 		set(Crusader, function() {
 			if (state.inventory.includes(Cross)) {
 				say([Crusader, "You may pass"])
@@ -420,9 +426,9 @@ const state = {
 			}
 		}, -21, 11, .5, 0, "A crusader")
 		set(MusaBack, null, 34, 18, .5, 0)
-		setHotspot(Enter, "Enter Byzantine", function() {
+		setHotspot(Enter, "Enter Byzantium", function() {
 			if (state.inventory.includes(Cross)) {
-				show("ByzantineMarket")
+				show("ByzantiumMarket")
 			} else {
 				say([Crusader, "Not so fast!"])
 			}
@@ -433,8 +439,8 @@ const state = {
 			}, 46, 16, .13, 0, "Some grass")
 		}
 	},
-	ByzantineMarket: function() {
-		set(ByzantineMarket)
+	ByzantiumMarket: function() {
+		set(ByzantiumMarket)
 		set(M1, function() {
 			say([
 				M1, "Want to buy some porcelain?",
@@ -489,10 +495,11 @@ function shade(m, f) {
 	M.innerHTML = m
 	M.style.display = "block"
 	M.onclick = function() {
+		clearTimeout(id)
 		M.style.display = "none"
 		f && f()
 	}
-	setTimeout(M.onclick, 1000 + 200 * m.split(' ').length)
+	const id = setTimeout(M.onclick, 1000 + 200 * m.split(' ').length)
 }
 
 function fly(to) {
@@ -605,13 +612,11 @@ function buildCross() {
 				say([
 					M3, "Hm, there a too many around here"
 				])
-			} else if (state.scene == "Byzantine") {
+			} else if (state.scene == "Byzantium") {
 				say([
 					currentMusa(), "See, I'm Christian!",
 					Crusader, "Very well! You may pass"
-				], function() {
-					show("ByzantineMarket")
-				})
+				])
 			} else {
 				noUse()
 			}
