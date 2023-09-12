@@ -74,7 +74,6 @@ const state = {
 				})
 			}
 		}, -37, 14, .5, 0, "Talk to the seer")
-		set(Camel, letsGo, -90, 30, 1, 0, "Let's go!")
 		setHotspot(OutOfTown, "Let's go!", letsGo)
 		set(Bamidele, function() {
 			say([Bamidele, "Hurry up!"])
@@ -196,7 +195,14 @@ const state = {
 		if (!state.inventory.includes(Sword)) {
 			set(Sword, function() {
 				addToInventory(Sword, function() {
-					if (!state.unchained) {
+					if (state.silk) {
+						removeFromInventory(Sword)
+						addToInventory(Silk)
+						say([
+							M3, "Nice trading with you",
+							currentMusa(), "Finally I got the Silk!"
+						])
+					} else if (!state.unchained) {
 						state.unchained = 1
 						shade("Clang!", function() {
 							show("CampDead")
@@ -249,20 +255,11 @@ const state = {
 			set(Jinn, function() {
 				say([Musa, [
 					{
-						text: () => state.real
-							? null
-							: "Are you real?",
-						action: () => {
-							say([Jinn, "As real as you are"])
-							state.real = 1
-						}
-					},
-					{
 						text: () => state.wishes
 							? null
-							: "Do I have three wishes?",
+							: "My three wishes are…",
 						action: () => {
-							say([Jinn, "I'm not that kind of Jinn, sorry"])
+							say([Jinn, "Sorry, no wishes today, kid"])
 							state.wishes = 1
 						}
 					},
@@ -287,7 +284,7 @@ const state = {
 					},
 					{
 						text: () => state.howToSteer
-							? "How do I steer the carpet?"
+							? "And how do I steer the carpet?"
 							: null,
 						action: () => {
 							say([
@@ -295,6 +292,7 @@ const state = {
 								Musa, "Bagdad!",
 								Jinn, "Someone is still looking…"
 							], function() {
+								remove(Jinn)
 								window.onblur = function() {
 									if (state.inventory.includes(Carpet)) {
 										fly("Bagdad")
@@ -322,13 +320,18 @@ const state = {
 				if (state.carpetUsed) {
 					say([currentMusa(), [
 						{
-							text: () => state.scene != "Bagdad" ? "Bagdad" : null,
+							text: () => state.scene != "Bagdad"
+								? "Bagdad"
+								: null,
 							action: () => {
 								fly("Bagdad")
 							}
 						},
 						{
-							text: () => state.byzantine && state.scene != "Byzantine" ? "Byzantine" : null,
+							text: () => state.byzantine &&
+									state.scene != "Byzantine"
+								? "Byzantine"
+								: null,
 							action: () => {
 								fly("Byzantine")
 							}
@@ -345,7 +348,9 @@ const state = {
 						},
 					]])
 				} else {
-					say([currentMusa(), "I don't know how"])
+					say([currentMusa(), state.howToSteer
+						? "Someone is still looking…"
+						: "I don't know how"])
 				}
 			})
 			say([Musa, "Got a carpet, need a house!"])
@@ -373,20 +378,78 @@ const state = {
 			}
 		}, 0, 0, .45, 0, "Mongol")
 		set(MusaBack, null, -26, 17, .5, 0)
+		const takeArrow = function(a) {
+			if (state.arrow) {
+				say([MusaBack, "I already have an arrow"])
+			} else {
+				addToInventory(a, buildCross)
+				state.arrow = 1
+			}
+		}
+		if (!state.inventory.includes(A1)) {
+			set(A1, () => takeArrow(A1), 20, 18, .2, -35, "Broken Arrow")
+		}
+		if (!state.inventory.includes(A2)) {
+			set(A2, () => takeArrow(A2), -5, 32, .2, -55, "Broken Arrow")
+		}
+		if (!state.inventory.includes(A3)) {
+			set(A3, () => takeArrow(A3), 40, 28, .2, -15, "Broken Arrow")
+		}
 		if (!state.firstTimeBagdad) {
-			say([MusaBack, "Well, this carpet is fast!"])
+			say([MusaBack, "Parked the carpet outside of view"])
 			state.firstTimeBagdad = 1
 		}
 	},
 	Byzantine: function() {
 		set(Byzantine)
 		set(Crusader, function() {
-			say([Crusader, "What's your desire?"])
+			if (state.inventory.includes(Cross)) {
+				say([Crusader, "You may pass"])
+			} else {
+				say([
+					Crusader, "Are you Christian?",
+					MusaBack, "No",
+					Crusader, "Then you can't enter. Only Christians today."
+				])
+			}
 		}, -21, 11, .5, 0, "A crusader")
-		set(MusaBack, null, 35, 18, .5, 0)
+		set(MusaBack, null, 34, 18, .5, 0)
 		setHotspot(Enter, "Enter Byzantine", function() {
-			say([Crusader, "Not so fast!"])
+			if (state.inventory.includes(Cross)) {
+				show("ByzantineMarket")
+			} else {
+				say([Crusader, "Not so fast!"])
+			}
 		})
+		if (!state.inventory.includes(Grass)) {
+			set(Grass, function() {
+				addToInventory(Grass, buildCross)
+			}, 46, 16, .13, 0, "Some grass")
+		}
+	},
+	ByzantineMarket: function() {
+		set(ByzantineMarket)
+		set(M1, function() {
+			say([
+				M1, "Want to buy some Porcelain?",
+				MusaBack, "No, not my cup of tea"
+			])
+		}, 0, 0, 1, 0, "Porcelain")
+		set(M2, function() {
+			say([
+				M2, "Want to buy some Jade?",
+				MusaBack, "No, thanks"
+			])
+		}, 0, 0, 1, 0, "Jade")
+		set(M3, function() {
+			state.silk = 1
+			say([
+				M3, "Want to buy some Silk?",
+				MusaBack, "Very much!",
+				M3, "Do you have something to trade?"
+			])
+		}, 0, 0, 1, 0, "Silk")
+		set(MusaBack, null, 11, 9, .5, 0)
 	},
 	Home: function() {
 		state.inventory.length = 0
@@ -480,6 +543,20 @@ function addToInventory(item, f) {
 		item.use = f
 		state.inventory.push(item)
 		updateInventory()
+	}
+}
+
+function buildCross() {
+	if (state.arrow && state.inventory.includes(Grass)) {
+		removeFromInventory(A1)
+		removeFromInventory(A2)
+		removeFromInventory(A3)
+		removeFromInventory(Grass)
+		addToInventory(Cross, function() {
+			say([currentMusa(), "Now I can pass the crusader"])
+		})
+	} else {
+		noUse()
 	}
 }
 
