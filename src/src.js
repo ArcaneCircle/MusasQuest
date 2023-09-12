@@ -21,20 +21,20 @@ const state = {
 		}, 0, -10, .4, 0, "The king")
 		set(MusaBack, null, 25, 18, .5)
 		set(Bamidele, null, -26, 5, .5, 0, "Bamidele, the kings guard")
-		set(HelmetOnBamidele, null, -26, 5, .5, 0, "Bamidele, the kings guard")
+		set(HelmetOnBamidele, null, -26, -18, .5, 0, "Bamidele, the kings guard")
 	},
 	Market: function() {
 		set(Market)
 		set(Musa, null, 20, 15, .55, 0)
 		set(RedFruits, function() {
 			say([Musa, "These are tasty! I like them!"])
-		}, 0, 0, 0, 0, "Red fruits")
+		}, -4, 5, 0, 0, "Red fruits")
 		set(YellowFruits, function() {
 			say([Musa, "Urgh, the yellow ones make me sick."])
-		}, 0, 0, 0, 0, "Yellow fruits")
+		}, -13, 7, 0, 0, "Yellow fruits")
 		set(GreenFruits, function() {
 			say([Musa, "The green ones are too sour!"])
-		}, 0, 0, 0, 0, "Green fruits")
+		}, 3, 10, 0, 0, "Green fruits")
 		const letsGo = function() {
 			if (state.seer) {
 				shade("And so we travel until…", function() {
@@ -78,7 +78,7 @@ const state = {
 		set(Bamidele, function() {
 			say([Bamidele, "Hurry up!"])
 		}, 45, 20, .55, 0, "Bamidele")
-		set(HelmetOnBamidele, null, 45, 20, .55, 0, "Bamidele")
+		set(HelmetOnBamidele, null, 45, -5, .55, 0, "Bamidele")
 	},
 	CampNight: function() {
 		set(CampNight)
@@ -150,7 +150,7 @@ const state = {
 						})
 					})
 				})
-			}, -31, 5, .55, 0, "Bamidele's helmet")
+			}, -31, -21, .55, 0, "Bamidele's helmet")
 		}
 		set(Musa, null, 35, 14, .5, 0)
 	},
@@ -165,10 +165,13 @@ const state = {
 			])
 		}, -32, -10, .4, 0, "Robber")
 		set(BamideleDead, null, -5, 25, .5, 0, "Dead guard")
-		set(BamideleTurban, null, -5, 25, .5, 0, "Dead guard")
+		set(BamideleTurban, null, -25, 16, .5, 0, "Dead guard")
 		set(MusaBound, null, 36, 14, .5, 0)
 		set(Chains, null, 36, 24, .13, 0)
-		say([Robber, "Good morning, slave!"])
+		if (!state.morning) {
+			state.morning = 1
+			say([Robber, "Good morning, slave!"])
+		}
 	},
 	CampDead: function() {
 		set(CampDay)
@@ -183,10 +186,12 @@ const state = {
 						if (state.scene == "TempleEntry") {
 							removeFromInventory(TurbanRope)
 							show("Temple")
+						} else {
+							noUse()
 						}
 					})
 				}
-			}, -5, 25, .5, 0, state.lookForRope ? "Turban" : "Dead guard")
+			}, -25, 16, .5, 0, state.lookForRope ? "Turban" : "Dead guard")
 		}
 		set(RobberDead, null, -50, 14, .4, 0, "Dead robber")
 		set(Helmet, function() {
@@ -200,7 +205,8 @@ const state = {
 						addToInventory(Silk)
 						say([
 							M3, "Nice trading with you",
-							currentMusa(), "Finally I got the Silk!"
+							currentMusa(), "Finally I got the silk!",
+							currentMusa(), "Time to go home!"
 						])
 					} else if (!state.unchained) {
 						state.unchained = 1
@@ -314,7 +320,7 @@ const state = {
 					Musa, "Whoaa!",
 				])
 			}
-		}, 12, 7, .2, 0, "A golden lamp")
+		}, 12, 14, .2, 0, "A golden lamp")
 		set(Carpet, function() {
 			addToInventory(Carpet, function() {
 				if (state.carpetUsed) {
@@ -364,7 +370,7 @@ const state = {
 				say([Mongol, "I said we meet in Byzantine or should I chop your ugly head off right now?!"])
 			} else if (state.bagdad) {
 				say([
-					MusaBack, "But where can I find silk then?",
+					MusaBack, "But where can I find silk now?",
 					Mongol, "Try Byzantine, ha ha ha!",
 					Mongol, "I will meet you there…",
 				])
@@ -409,7 +415,7 @@ const state = {
 				say([
 					Crusader, "Are you Christian?",
 					MusaBack, "No",
-					Crusader, "Then you can't enter. Only Christians today."
+					Crusader, "Thought so. Then you can't enter. Only Christians today."
 				])
 			}
 		}, -21, 11, .5, 0, "A crusader")
@@ -431,24 +437,31 @@ const state = {
 		set(ByzantineMarket)
 		set(M1, function() {
 			say([
-				M1, "Want to buy some Porcelain?",
+				M1, "Want to buy some porcelain?",
 				MusaBack, "No, not my cup of tea"
 			])
-		}, 0, 0, 1, 0, "Porcelain")
+		}, -29, -13, 1, 0, "Porcelain")
 		set(M2, function() {
 			say([
-				M2, "Want to buy some Jade?",
+				M2, "Want to buy some jade?",
 				MusaBack, "No, thanks"
 			])
-		}, 0, 0, 1, 0, "Jade")
+		}, 0, -11, 1, 0, "Jade")
 		set(M3, function() {
-			state.silk = 1
-			say([
-				M3, "Want to buy some Silk?",
-				MusaBack, "Very much!",
-				M3, "Do you have something to trade?"
-			])
-		}, 0, 0, 1, 0, "Silk")
+			if (state.inventory.includes(Silk)) {
+				say([
+					M3, "Want to buy some more silk?",
+					MusaBack, "No, thanks, that's enough",
+				])
+			} else {
+				state.silk = 1
+				say([
+					M3, "Want to buy some silk?",
+					MusaBack, "Very much!",
+					M3, "Do you have something to trade?"
+				])
+			}
+		}, 28, -10, 1, 0, "Silk")
 		set(MusaBack, null, 11, 9, .5, 0)
 	},
 	Home: function() {
@@ -460,15 +473,15 @@ const state = {
 		say([
 			MusaBack, "I'm home! And I have the gift you asked for!",
 			King, "Wonderful! But the gift is having you back, and as the man that you need to be to follow me.",
-			King, "Now, you saw the world, and found your place in it.",
-			MusaBack, "I have.",
+			King, "Now, you saw the world, and will be a wise king one day.",
+			MusaBack, "I will be.",
 		], function() {
 			M.onclick = null
 			M.innerHTML = "The End"
 			M.style.display = "block"
 		})
 	},
-}, zones = []
+}
 
 let centerX, centerY, hasTouch
 
@@ -493,6 +506,40 @@ function currentMusa() {
 		dave.style.visibility == "visible")
 }
 
+function newZone(size) {
+	const z = document.createElementNS("http://www.w3.org/2000/svg","circle")
+	z.setAttributeNS(null, "cx", 50)
+	z.setAttributeNS(null, "cy", 50)
+	z.setAttributeNS(null, "r", 5 * size)
+	z.setAttributeNS(null, "fill", "rgba(0,0,0,0)")
+	return z
+}
+
+function removeZone(e) {
+	if (e.zone) {
+		S.removeChild(e.zone)
+		e.zone = null
+	}
+}
+
+function addZone(e, size) {
+	if (!e.zone || e.zone.size != size) {
+		if (e.zone) {
+			removeZone(e)
+		}
+		e.zone = newZone(1 / size)
+		e.zone.size = size
+		S.appendChild(e.zone)
+	}
+	const z = e.zone
+	z.style.transformOrigin = e.style.transformOrigin
+	z.style.transform = e.style.transform
+	z.style.display = "block"
+	z.style.visibility = "visible"
+	z.onclick = e.onclick
+	z.hoverMessage = e.hoverMessage
+}
+
 function noUse() {
 	say([currentMusa(), "This has no use here"])
 }
@@ -500,7 +547,7 @@ function noUse() {
 function updateInventory() {
 	let x = 0
 	state.inventory.forEach(e => {
-		e.style.transformOrigin = "left top"
+		e.style.transformOrigin = "0 0"
 		e.style.transform = `translate(${x}px, 0px) scale(.1)`
 		e.style.visibility = "visible"
 		e.onclick = function() {
@@ -511,6 +558,9 @@ function updateInventory() {
 			} else {
 				noUse()
 			}
+		}
+		if (hasTouch) {
+			addZone(e, .1)
 		}
 		x += 10
 	})
@@ -524,14 +574,12 @@ function remove(e) {
 		e.onclick = null
 	}
 	e.onclick = null
-	if (e.zone) {
-		e.zone.style.visibility = "hidden"
-		e.zone = null
-	}
+	removeZone(e)
 }
 
 function removeFromInventory(e) {
 	e.style.visibility = "hidden"
+	removeZone(e)
 	state.inventory = state.inventory.filter(item => item != e)
 	updateInventory()
 }
@@ -553,8 +601,22 @@ function buildCross() {
 		removeFromInventory(A3)
 		removeFromInventory(Grass)
 		addToInventory(Cross, function() {
-			say([currentMusa(), "Now I can pass the crusader"])
+			if (state.silk) {
+				say([
+					M3, "Hm, there a too many around here"
+				])
+			} else if (state.scene == "Byzantine") {
+				say([
+					currentMusa(), "See, I'm Christian!",
+					Crusader, "Very well! You may pass"
+				], function() {
+					show("ByzantineMarket")
+				})
+			} else {
+				noUse()
+			}
 		})
+		say([currentMusa(), "Now I can pass the crusader"])
 	} else {
 		noUse()
 	}
@@ -636,38 +698,6 @@ function say(a, f, cont) {
 	BP.style.left = (center - margin / 2 - x) + "px"
 }
 
-function resetZones() {
-	zones.forEach(z => z.style.display = "none")
-	zones.next = 0
-}
-
-function newZone() {
-	const z = document.createElementNS("http://www.w3.org/2000/svg","circle")
-	z.setAttributeNS(null, "cx", 50)
-	z.setAttributeNS(null, "cy", 50)
-	z.setAttributeNS(null, "r", 10)
-	z.setAttributeNS(null, "fill", "rgba(0,0,0,0)")
-	return z
-}
-
-function getZone() {
-	const next = zones.next++
-	if (zones.length > next) {
-		return zones[next]
-	}
-	const z = newZone()
-	S.appendChild(z)
-	zones.push(z)
-	return z
-}
-
-function translate(x, y, size, deg) {
-	return `translate(${
-		centerX - 50 + (x || 0)}px, ${
-		centerY - 50 + (y || 0)}px) rotateZ(${
-		deg || 0}deg) scale(${size || 1})`
-}
-
 function info(m) {
 	I.innerHTML = typeof m == "string" ? m : "&nbsp;"
 }
@@ -678,6 +708,7 @@ function setHotspot(e, m, f) {
 		for (let i = children.length; i--;) {
 			children[i].hoverMessage = m
 		}
+		e.hoverMessage = m
 	} else {
 		e.onmousemove = m ? function(event) {
 			info(m)
@@ -690,45 +721,35 @@ function setHotspot(e, m, f) {
 }
 
 function set(e, f, x, y, size, deg, hover) {
+	size ||= 1
 	// Transform origin at runtime to keep sprite coordinates in the
 	// 0-99 range. If the source is centered at 0/0, there are minus
 	// signs that make the values a tiny bit worse to compress.
-	e.style.transformOrigin = `50px 50px`
-	e.style.transform = translate(x, y, size, deg)
+	e.style.transformOrigin = "50px 50px"
+	e.style.transform = `translate(${
+		centerX - 50 + (x || 0)}px, ${
+		centerY - 50 + (y || 0)}px) rotateZ(${
+		deg || 0}deg) scale(${size})`
 	e.style.visibility = "visible"
 	setHotspot(e, hover)
-	let onclick = null
 	if (f) {
-		onclick = function(event) {
+		e.onclick = function(event) {
 			B.talking || f()
 			event.stopPropagation()
 		}
-		// Add a finger-tip sized hotspot for small targets.
 		if (hasTouch) {
-			const z = getZone()
-			z.style.transformOrigin = `50px 50px`
-			z.style.transform = e.style.transform
-			z.style.display = "block"
-			z.onclick = onclick
-			if (hover) {
-				z.hoverMessage = hover
-			}
-			e.zone = z
+			addZone(e, size)
 		}
-	}
-	const children = e.children
-	for (let i = children.length; i--;) {
-		children[i].onclick = onclick
 	}
 }
 
 function show(name) {
 	info()
 	clear()
-	resetZones()
 	for (const e of S.getElementsByTagName("g")) {
 		e.style.visibility = "hidden"
-		e.zone = e.onclick = null
+		e.onclick = null
+		removeZone(e)
 	}
 	state.scene = name
 	scenes[name]()
