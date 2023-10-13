@@ -1,71 +1,11 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, user-scalable=0"/>
-<title>Musa's Quest</title>
-<style>
-html {
-	background: #000;
-}
-body {
-	margin: 0; padding: 0;
-	font: bold min(3vw, 3vh) sans-serif; color: #fff;
-	line-height: 150%;
-	overflow: hidden;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-ms-touch-action: none;
-	user-select: none;
-}
-svg {
-	display: none;
-}
-#B {
-	position: fixed;
-	padding: .5em .75em;
-	max-width: 90vw;
-	background: #fff; color: #111;
-	border-radius: .25em;
-	display: none;
-}
-#BP {
-	position: absolute;
-	left: calc(50% - 1em); bottom: -.9em;
-	width: 0; height: 0;
-	border-left: .5em solid transparent;
-	border-right: .5em solid transparent;
-	border-top: 1em solid #fff;
-}
-ol {
-	margin: 0; padding: 0 0 0 1em;
-}
-a {
-	color: #111;
-}
-#I, #M {
-	content: '&npsp;';
-	position: fixed;
-	left: 0; right: 0;
-	bottom: 0;
-	text-align: center;
-}
-#I {
-	background: rgba(0,0,0,.5);
-	padding: .25em;
-}
-#M {
-	display: none;
-	background: #000;
-	top: 0;
-	padding: 45vh 0 0;
-}
-</style>
-</head>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=0"/>
+    <link rel="stylesheet" href="./main.css" />
+    <script src="webxdc.js"></script>
+  </head>
 <body>
 <svg id="S">
 <g id="Throne">
@@ -445,5 +385,5 @@ a {
 <div id="I"></div>
 <div id="M"></div>
 </body>
-<script src="src.js"></script>
+<script src="./main.js" type="module"></script>
 </html>

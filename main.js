@@ -485,6 +485,14 @@ const state = {
 			M.onclick = null
 			M.innerHTML = "The End"
 			M.style.display = "block"
+            const info = `${window.webxdc.selfName} won Musa's Quest!`;
+            window.webxdc.sendUpdate(
+                {
+                    payload: null,
+                    info,
+                },
+                info,
+            );
 		})
 	},
 }
