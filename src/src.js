@@ -419,9 +419,9 @@ const state = {
 				say([Crusader, "You may pass"])
 			} else {
 				say([
-					Crusader, "Are you Christian?",
-					MusaBack, "No",
-					Crusader, "Thought so. Then you can't enter. Only Christians today."
+					Crusader, "Are you a Christian?",
+					MusaBack, "No, I am Musa",
+					Crusader, "Very funny. You can't enter. Only Christians today."
 				])
 			}
 		}, -21, 11, .5, 0, "A crusader")
