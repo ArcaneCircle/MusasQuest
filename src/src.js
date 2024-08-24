@@ -509,8 +509,8 @@ function fly(to) {
 }
 
 function currentMusa() {
-	return [Musa, MusaBack, MusaBound].find(dave =>
-		dave.style.visibility == "visible")
+	return [Musa, MusaBack, MusaBound].find(musa =>
+		musa.style.visibility == "visible")
 }
 
 function newZone(size) {
