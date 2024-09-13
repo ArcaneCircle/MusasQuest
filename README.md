@@ -3,7 +3,7 @@
 <img src="svg/screenshot-400x250.jpg" alt="Screenshot"/>
 
 A medieval adventure about the search for an exotic gift in 13 kilobytes
-[js13kGames][js13kgames] 2023.
+for [js13kGames][js13kgames] 2023.
 The theme was "13th Century".
 
 Play it [here][play].
