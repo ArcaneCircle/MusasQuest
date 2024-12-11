@@ -697,11 +697,11 @@ const state = {
           } else {
             say([
               Crusader,
-              "Are you Christian?",
+              "Are you a Christian?",
               MusaBack,
-              "No",
+              "No, I am Musa",
               Crusader,
-              "Thought so. Then you can't enter. Only Christians today.",
+              "Very funny. You can't enter. Only Christians today.",
             ]);
           }
         },
@@ -819,7 +819,7 @@ const state = {
               payload: null,
               info,
             },
-            info,
+            "",
           );
         },
       );
@@ -847,7 +847,7 @@ function fly(to) {
 
 function currentMusa() {
   return [Musa, MusaBack, MusaBound].find(
-    (dave) => dave.style.visibility == "visible",
+    (musa) => musa.style.visibility == "visible",
   );
 }
 
