@@ -1,3 +1,5 @@
+import "./main.css";
+
 const state = {
     scene: "Intro",
     inventory: [],
