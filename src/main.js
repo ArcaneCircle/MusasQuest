@@ -383,28 +383,7 @@ const state = {
         set(
           Sword,
           function () {
-            addToInventory(Sword, function () {
-              if (state.silk) {
-                removeFromInventory(Sword);
-                addToInventory(Silk);
-                say([
-                  M3,
-                  "Nice trading with you",
-                  currentMusa(),
-                  "Finally I got the silk!",
-                  currentMusa(),
-                  "Time to go home!",
-                ]);
-              } else if (!state.unchained) {
-                state.unchained = 1;
-                shade("Clang!", function () {
-                  show("CampDead");
-                  say([Musa, "Free again!"]);
-                });
-              } else {
-                noUse();
-              }
-            });
+            addToInventory_Sword();
           },
           -40,
           19,
@@ -540,11 +519,13 @@ const state = {
                         ],
                         function () {
                           remove(Jinn);
+                          window.localStorage.setItem("saidbagdad", 1);
                           window.onblur = function () {
                             if (state.inventory.includes(Carpet)) {
                               fly("Bagdad");
                               state.carpetUsed = 1;
                               window.onblur = null;
+                              window.localStorage.setItem("saidbagdad", 0);
                             }
                           };
                         },
@@ -576,50 +557,7 @@ const state = {
       set(
         Carpet,
         function () {
-          addToInventory(Carpet, function () {
-            if (state.carpetUsed) {
-              say([
-                currentMusa(),
-                [
-                  {
-                    text: () => (state.scene != "Bagdad" ? "Bagdad" : null),
-                    action: () => {
-                      fly("Bagdad");
-                    },
-                  },
-                  {
-                    text: () =>
-                      state.byzantine && !state.scene.startsWith("Byzantium")
-                        ? "Byzantium"
-                        : null,
-                    action: () => {
-                      fly("Byzantium");
-                    },
-                  },
-                  {
-                    text: () => "Home",
-                    action: () => {
-                      if (state.inventory.includes(Silk)) {
-                        fly("Home");
-                      } else {
-                        say([
-                          currentMusa(),
-                          "I can't go home without the silk",
-                        ]);
-                      }
-                    },
-                  },
-                ],
-              ]);
-            } else {
-              say([
-                currentMusa(),
-                state.howToSteer
-                  ? "Someone is still looking…"
-                  : "I don't know how",
-              ]);
-            }
-          });
+          addToInventory_Carpet();
           say([Musa, "Got a carpet, need a house!"]);
         },
         10,
@@ -825,6 +763,73 @@ const state = {
       );
     },
   };
+
+function addToInventory_Sword() {
+  addToInventory(Sword, function () {
+    if (state.silk) {
+      removeFromInventory(Sword);
+      addToInventory(Silk);
+      say([
+        M3,
+        "Nice trading with you",
+        currentMusa(),
+        "Finally I got the silk!",
+        currentMusa(),
+        "Time to go home!",
+      ]);
+    } else if (!state.unchained) {
+      state.unchained = 1;
+      shade("Clang!", function () {
+        show("CampDead");
+        say([Musa, "Free again!"]);
+      });
+    } else {
+      noUse();
+    }
+  });
+}
+
+function addToInventory_Carpet() {
+  addToInventory(Carpet, function () {
+    if (state.carpetUsed) {
+      say([
+        currentMusa(),
+        [
+          {
+            text: () => (state.scene != "Bagdad" ? "Bagdad" : null),
+            action: () => {
+              fly("Bagdad");
+            },
+          },
+          {
+            text: () =>
+              state.byzantine && !state.scene.startsWith("Byzantium")
+                ? "Byzantium"
+                : null,
+            action: () => {
+              fly("Byzantium");
+            },
+          },
+          {
+            text: () => "Home",
+            action: () => {
+              if (state.inventory.includes(Silk)) {
+                fly("Home");
+              } else {
+                say([currentMusa(), "I can't go home without the silk"]);
+              }
+            },
+          },
+        ],
+      ]);
+    } else {
+      say([
+        currentMusa(),
+        state.howToSteer ? "Someone is still looking…" : "I don't know how",
+      ]);
+    }
+  });
+}
 
 let centerX, centerY, hasTouch;
 
@@ -1122,6 +1127,21 @@ function resize() {
 }
 
 window.onload = function () {
+  // set scene after looking away (= restarting app) if onblur() does not work
+  if (window.localStorage.getItem("saidbagdad") == 1) {
+    window.localStorage.setItem("saidbagdad", 0);
+    state.scene = "Bagdad";
+    state.carpetUsed = 1;
+    state.howToSteer = 1;
+    state.jinn = 1;
+    state.lookForRope = 1;
+    state.morning = 1;
+    state.scorpion = 1;
+    state.unchained = 1;
+    state.wishes = 1;
+    addToInventory_Sword();
+    addToInventory_Carpet();
+  }
   document.onclick = skip;
   document.onkeyup = skip;
   // Prevent pinch/zoom on iOS 11.
