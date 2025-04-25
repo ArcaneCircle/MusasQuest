@@ -604,13 +604,7 @@ const items = {
                         ],
                         function () {
                           remove(Jinn);
-                          window.onblur = function () {
-                            if (state.inventory.includes(Carpet)) {
-                              fly("Bagdad");
-                              state.carpetUsed = 1;
-                              window.onblur = null;
-                            }
-                          };
+                          state.saidBagdad = 1;
                         },
                       );
                     },
@@ -1134,6 +1128,14 @@ function resize() {
   show(state.scene);
 }
 
+function checkSaidBagdad() {
+  if (state.saidBagdad) {
+    fly("Bagdad");
+    state.carpetUsed = 1;
+    state.saidBagdad = undefined;
+  }
+}
+
 window.onload = function () {
   document.onclick = skip;
   document.onkeyup = skip;
@@ -1174,7 +1176,11 @@ window.onload = function () {
   }
   window.onresize = resize;
   resize();
+  checkSaidBagdad();
   document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      checkSaidBagdad();
+    }
     localStorage.state = JSON.stringify(state);
   });
 };
