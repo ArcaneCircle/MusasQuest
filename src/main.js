@@ -1,10 +1,134 @@
 import "./main.css";
 
-const state = {
-    scene: "Intro",
-    inventory: [],
-  },
-  scenes = {
+const initialState = '{"scene": "Intro", "inventory": []}';
+let state = JSON.parse(localStorage.state || initialState);
+const items = {
+        "Silk": Silk,
+        "Helmet": Helmet,
+        "TurbanRope": TurbanRope,
+        "Sword": Sword,
+        "Chains": Chains,
+        "Carpet": Carpet,
+        "A1": A1,
+        "A2": A2,
+        "A3": A3,
+        "Grass": Grass,
+        "Cross": Cross,
+      },
+      itemUse = {
+        "Helmet": function () {
+          if (state.scorpion) {
+            if (state.scene == "CampDay") {
+              say(
+                [
+                  currentMusa(),
+                  "Want a helmet?",
+                  Robber,
+                  "Give me everything you have!",
+                  currentMusa(),
+                  "Take it",
+                ],
+                function () {
+                  removeFromInventory("Helmet");
+                  shade("Aaaahhh!", function () {
+                    show("CampDead");
+                  });
+                },
+              );
+            } else {
+              say([currentMusa(), "A scorpion in a helmet"]);
+            }
+          } else {
+            remove(Scorpion);
+            state.scorpion = 1;
+            say([
+              currentMusa(),
+              "Got you!",
+              Bamidele,
+              "You can keep the helmet",
+            ]);
+          }
+        },
+        "TurbanRope": function () {
+          if (state.scene == "TempleEntry") {
+            removeFromInventory("TurbanRope");
+            show("Temple");
+          } else {
+            noUse();
+          }
+        },
+        "Sword": function () {
+          if (state.silk) {
+            removeFromInventory("Sword");
+            addToInventory("Silk");
+            say([
+              M3,
+              "Nice trading with you",
+              currentMusa(),
+              "Finally I got the silk!",
+              currentMusa(),
+              "Time to go home!",
+            ]);
+          } else if (!state.unchained) {
+            state.unchained = 1;
+            shade("Clang!", function () {
+              show("CampDead");
+              say([Musa, "Free again!"]);
+            });
+          } else {
+            noUse();
+          }
+        },
+        "Carpet": function () {
+          if (state.carpetUsed) {
+            say([
+              currentMusa(),
+              [
+                {
+                  text: () => (state.scene != "Bagdad" ? "Bagdad" : null),
+                  action: () => {
+                    fly("Bagdad");
+                  },
+                },
+                {
+                  text: () =>
+                  state.byzantine && !state.scene.startsWith("Byzantium")
+                    ? "Byzantium"
+                    : null,
+                  action: () => {
+                    fly("Byzantium");
+                  },
+                },
+                {
+                  text: () => "Home",
+                  action: () => {
+                    if (state.inventory.includes("Silk")) {
+                      fly("Home");
+                    } else {
+                      say([
+                        currentMusa(),
+                        "I can't go home without the silk",
+                      ]);
+                    }
+                  },
+                },
+              ],
+            ]);
+          } else {
+            say([
+              currentMusa(),
+              state.howToSteer
+                ? "Someone is still looking…"
+                : "I don't know how",
+            ]);
+          }
+        },
+        "A1": buildCross,
+        "A2": buildCross,
+        "A3": buildCross,
+        "Grass": buildCross,
+      },
+      scenes = {
     Intro: function () {
       set(Throne);
       set(
@@ -240,7 +364,7 @@ const state = {
         0,
         "Talk to my Bamidele",
       );
-      if (!state.inventory.includes(Helmet)) {
+      if (!state.inventory.includes("Helmet")) {
         set(
           HelmetOnBamidele,
           function () {
@@ -256,39 +380,7 @@ const state = {
                 ],
                 function () {
                   remove(HelmetOnBamidele);
-                  addToInventory(Helmet, function () {
-                    if (state.scorpion) {
-                      if (state.scene == "CampDay") {
-                        say(
-                          [
-                            currentMusa(),
-                            "Want a helmet?",
-                            Robber,
-                            "Give me everything you have!",
-                            currentMusa(),
-                            "Take it",
-                          ],
-                          function () {
-                            removeFromInventory(Helmet);
-                            shade("Aaaahhh!", function () {
-                              show("CampDead");
-                            });
-                          },
-                        );
-                      } else {
-                        say([currentMusa(), "A scorpion in a helmet"]);
-                      }
-                    } else {
-                      remove(Scorpion);
-                      state.scorpion = 1;
-                      say([
-                        currentMusa(),
-                        "Got you!",
-                        Bamidele,
-                        "You can keep the helmet",
-                      ]);
-                    }
-                  });
+                  addToInventory("Helmet");
                 },
               );
             });
@@ -343,21 +435,14 @@ const state = {
       set(CampDay);
       set(Tent);
       set(BamideleDead, null, -5, 25, 0.5, 0, "Dead Bamidele");
-      if (!state.inventory.includes(TurbanRope)) {
+      if (!state.inventory.includes("TurbanRope")) {
         set(
           BamideleTurban,
           function () {
             if (state.lookForRope) {
               say([Musa, "That will do!"]);
               remove(BamideleTurban);
-              addToInventory(TurbanRope, function () {
-                if (state.scene == "TempleEntry") {
-                  removeFromInventory(TurbanRope);
-                  show("Temple");
-                } else {
-                  noUse();
-                }
-              });
+              addToInventory("TurbanRope");
             }
           },
           -25,
@@ -379,32 +464,11 @@ const state = {
         -22,
         "Helmet",
       );
-      if (!state.inventory.includes(Sword)) {
+      if (!state.inventory.includes("Sword")) {
         set(
           Sword,
           function () {
-            addToInventory(Sword, function () {
-              if (state.silk) {
-                removeFromInventory(Sword);
-                addToInventory(Silk);
-                say([
-                  M3,
-                  "Nice trading with you",
-                  currentMusa(),
-                  "Finally I got the silk!",
-                  currentMusa(),
-                  "Time to go home!",
-                ]);
-              } else if (!state.unchained) {
-                state.unchained = 1;
-                shade("Clang!", function () {
-                  show("CampDead");
-                  say([Musa, "Free again!"]);
-                });
-              } else {
-                noUse();
-              }
-            });
+            addToInventory("Sword");
           },
           -40,
           19,
@@ -415,11 +479,11 @@ const state = {
       }
       if (state.unchained) {
         set(Musa, null, 36, 14, 0.5, 0);
-        if (!state.inventory.includes(Chains)) {
+        if (!state.inventory.includes("Chains")) {
           set(
             Chains,
             function () {
-              addToInventory(Chains);
+              addToInventory("Chains");
             },
             36,
             44,
@@ -453,8 +517,8 @@ const state = {
       set(
         Column,
         function () {
-          if (state.inventory.includes(TurbanRope)) {
-            removeFromInventory(TurbanRope);
+          if (state.inventory.includes("TurbanRope")) {
+            removeFromInventory("TurbanRope");
             show("Temple");
           } else {
             state.lookForRope = 1;
@@ -501,11 +565,11 @@ const state = {
                   },
                   {
                     text: () =>
-                      state.inventory.includes(Carpet)
+                      state.inventory.includes("Carpet")
                         ? "How do I use the carpet?"
                         : "How do I get to Bagdad?",
                     action: () => {
-                      if (state.inventory.includes(Carpet)) {
+                      if (state.inventory.includes("Carpet")) {
                         say([
                           Jinn,
                           "The carpet only flies when noone is looking",
@@ -576,50 +640,7 @@ const state = {
       set(
         Carpet,
         function () {
-          addToInventory(Carpet, function () {
-            if (state.carpetUsed) {
-              say([
-                currentMusa(),
-                [
-                  {
-                    text: () => (state.scene != "Bagdad" ? "Bagdad" : null),
-                    action: () => {
-                      fly("Bagdad");
-                    },
-                  },
-                  {
-                    text: () =>
-                      state.byzantine && !state.scene.startsWith("Byzantium")
-                        ? "Byzantium"
-                        : null,
-                    action: () => {
-                      fly("Byzantium");
-                    },
-                  },
-                  {
-                    text: () => "Home",
-                    action: () => {
-                      if (state.inventory.includes(Silk)) {
-                        fly("Home");
-                      } else {
-                        say([
-                          currentMusa(),
-                          "I can't go home without the silk",
-                        ]);
-                      }
-                    },
-                  },
-                ],
-              ]);
-            } else {
-              say([
-                currentMusa(),
-                state.howToSteer
-                  ? "Someone is still looking…"
-                  : "I don't know how",
-              ]);
-            }
-          });
+          addToInventory("Carpet");
           say([Musa, "Got a carpet, need a house!"]);
         },
         10,
@@ -673,18 +694,18 @@ const state = {
         if (state.arrow) {
           say([MusaBack, "I already have an arrow"]);
         } else {
-          addToInventory(a, buildCross);
+          addToInventory(a);
           state.arrow = 1;
         }
       };
-      if (!state.inventory.includes(A1)) {
-        set(A1, () => takeArrow(A1), 20, 18, 0.2, -35, "Broken Arrow");
+      if (!state.inventory.includes("A1")) {
+        set(A1, () => takeArrow("A1"), 20, 18, 0.2, -35, "Broken Arrow");
       }
-      if (!state.inventory.includes(A2)) {
-        set(A2, () => takeArrow(A2), -5, 32, 0.2, -55, "Broken Arrow");
+      if (!state.inventory.includes("A2")) {
+        set(A2, () => takeArrow("A2"), -5, 32, 0.2, -55, "Broken Arrow");
       }
-      if (!state.inventory.includes(A3)) {
-        set(A3, () => takeArrow(A3), 40, 28, 0.2, -15, "Broken Arrow");
+      if (!state.inventory.includes("A3")) {
+        set(A3, () => takeArrow("A3"), 40, 28, 0.2, -15, "Broken Arrow");
       }
     },
     Byzantium: function () {
@@ -692,7 +713,7 @@ const state = {
       set(
         Crusader,
         function () {
-          if (state.inventory.includes(Cross)) {
+          if (state.inventory.includes("Cross")) {
             say([Crusader, "You may pass"]);
           } else {
             say([
@@ -713,17 +734,17 @@ const state = {
       );
       set(MusaBack, null, 34, 18, 0.5, 0);
       setHotspot(Enter, "Enter Byzantium", function () {
-        if (state.inventory.includes(Cross)) {
+        if (state.inventory.includes("Cross")) {
           show("ByzantiumMarket");
         } else {
           say([Crusader, "Not so fast!"]);
         }
       });
-      if (!state.inventory.includes(Grass)) {
+      if (!state.inventory.includes("Grass")) {
         set(
           Grass,
           function () {
-            addToInventory(Grass, buildCross);
+            addToInventory("Grass");
           },
           46,
           16,
@@ -765,7 +786,7 @@ const state = {
       set(
         M3,
         function () {
-          if (state.inventory.includes(Silk)) {
+          if (state.inventory.includes("Silk")) {
             say([
               M3,
               "Want to buy some more silk?",
@@ -821,6 +842,7 @@ const state = {
             },
             "",
           );
+          state = JSON.parse(initialState); // reset game
         },
       );
     },
@@ -890,16 +912,18 @@ function noUse() {
 }
 
 function updateInventory() {
+  console.log(`Inventory: ${JSON.stringify(state.inventory)}`);
   let x = 0;
-  state.inventory.forEach((e) => {
+  state.inventory.forEach((itemId) => {
+    const e = items[itemId];
     e.style.transformOrigin = "0 0";
     e.style.transform = `translate(${x}px, 0px) scale(.1)`;
     e.style.visibility = "visible";
     e.onclick = function () {
       if (B.talking) {
         return;
-      } else if (e.use) {
-        e.use();
+      } else if (itemUse[itemId]) {
+        itemUse[itemId]();
       } else {
         noUse();
       }
@@ -922,43 +946,31 @@ function remove(e) {
   removeZone(e);
 }
 
-function removeFromInventory(e) {
+function removeFromInventory(itemId) {
+  const e = items[itemId];
   e.style.visibility = "hidden";
   removeZone(e);
-  state.inventory = state.inventory.filter((item) => item != e);
+  state.inventory = state.inventory.filter((item) => item != itemId);
   updateInventory();
 }
 
-function addToInventory(item, f) {
-  if (!state.inventory.includes(item)) {
+function addToInventory(itemId) {
+  if (!state.inventory.includes(itemId)) {
+    const item = items[itemId];
     remove(item);
     item.style.visibility = "hidden";
-    item.use = f;
-    state.inventory.push(item);
+    state.inventory.push(itemId);
     updateInventory();
   }
 }
 
 function buildCross() {
-  if (state.arrow && state.inventory.includes(Grass)) {
-    removeFromInventory(A1);
-    removeFromInventory(A2);
-    removeFromInventory(A3);
-    removeFromInventory(Grass);
-    addToInventory(Cross, function () {
-      if (state.silk) {
-        say([M3, "Hm, there a too many around here"]);
-      } else if (state.scene == "Byzantium") {
-        say([
-          currentMusa(),
-          "See, I'm Christian!",
-          Crusader,
-          "Very well! You may pass",
-        ]);
-      } else {
-        noUse();
-      }
-    });
+  if (state.arrow && state.inventory.includes("Grass")) {
+    removeFromInventory("A1");
+    removeFromInventory("A2");
+    removeFromInventory("A3");
+    removeFromInventory("Grass");
+    addToInventory("Cross");
     say([currentMusa(), "Now I can pass the crusader"]);
   } else {
     noUse();
@@ -1088,6 +1100,7 @@ function set(e, f, x, y, size, deg, hover) {
 }
 
 function show(name) {
+  console.log(`Scene: ${name}`);
   info();
   clear();
   for (const e of S.getElementsByTagName("g")) {
@@ -1161,4 +1174,7 @@ window.onload = function () {
   }
   window.onresize = resize;
   resize();
+  document.addEventListener("visibilitychange", () => {
+    localStorage.state = JSON.stringify(state);
+  });
 };
