@@ -859,6 +859,7 @@ function currentMusa() {
 
 function newZone(size) {
   const z = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  z.classList.add("zone");
   z.setAttributeNS(null, "cx", 50);
   z.setAttributeNS(null, "cy", 50);
   z.setAttributeNS(null, "r", 5 * size);
@@ -912,9 +913,7 @@ function updateInventory() {
         noUse();
       }
     };
-    if (hasTouch) {
-      addZone(e, 0.1);
-    }
+    addZone(e, 0.1);
     x += 10;
   });
 }
