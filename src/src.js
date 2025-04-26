@@ -802,7 +802,6 @@ const items = {
     },
     Home: function () {
       state.inventory.length = 0;
-      updateInventory();
       set(Throne);
       set(King, null, 0, -10, 0.4);
       set(MusaBack, null, 25, 18, 0.5);
