@@ -679,16 +679,16 @@ const items = {
           say([MusaBack, "I don't need more arrows"]);
         } else {
           addToInventory(a);
-          state.arrow = 1;
+          state.arrow = a;
         }
       };
-      if (!state.inventory.includes("A1")) {
+      if (state.arrow !== "A1") {
         set(A1, () => takeArrow("A1"), 20, 18, 0.2, -35, "Broken Arrow");
       }
-      if (!state.inventory.includes("A2")) {
+      if (state.arrow !== "A2") {
         set(A2, () => takeArrow("A2"), -5, 32, 0.2, -55, "Broken Arrow");
       }
-      if (!state.inventory.includes("A3")) {
+      if (state.arrow !== "A3") {
         set(A3, () => takeArrow("A3"), 40, 28, 0.2, -15, "Broken Arrow");
       }
     },
@@ -949,9 +949,7 @@ function addToInventory(itemId) {
 
 function buildCross() {
   if (state.arrow && state.inventory.includes("Grass")) {
-    removeFromInventory("A1");
-    removeFromInventory("A2");
-    removeFromInventory("A3");
+    removeFromInventory(state.arrow);
     removeFromInventory("Grass");
     addToInventory("Cross");
     say([currentMusa(), "Now I can pass the crusader"]);
