@@ -301,7 +301,7 @@ const SVG = document.getElementById("S"),
                 Musa,
                 "Okay!",
                 Seer,
-                "And, one last thing: to fullfill your fate, you should not kill unless you have no other choice.",
+                "And, one last thing: to fulfill your fate, you should not kill unless you have no other choice.",
                 Musa,
                 "Good to know.",
               ],
@@ -607,7 +607,7 @@ const SVG = document.getElementById("S"),
                       if (state.inventory.includes("Carpet")) {
                         say([
                           Jinn,
-                          "The carpet only flies when noone is looking",
+                          "The carpet only flies when no one is looking",
                           Musa,
                           "Hmmm",
                         ]);
