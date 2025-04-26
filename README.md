@@ -56,3 +56,9 @@ To automatically build and create a new GitHub release with the `.xdc` file:
 git tag -a v1.0.1
 git push origin v1.0.1
 ```
+
+## Credits
+
+This game is a fork of https://github.com/markusfisch/MusasQuest
+which was originally created for the 2023 [js13kGames](https://js13kgames.com/)
+competition.
