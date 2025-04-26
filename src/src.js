@@ -1,3 +1,5 @@
+import { _ } from "./i18n.js";
+
 import "./main.css";
 
 const initialState = '{"scene": "Intro", "inventory": []}';
@@ -885,9 +887,12 @@ const SVG = document.getElementById("S"),
         ],
         function () {
           M.onclick = null;
-          M.innerHTML = "The End";
+          M.innerHTML = _("The End");
           M.style.display = "block";
-          const info = `${window.webxdc.selfName} won Musa's Quest!`;
+          const info = _("{{n}} won Musa's Quest!").replace(
+            "{{n}}",
+            window.webxdc.selfName,
+          );
           window.webxdc.sendUpdate(
             {
               payload: null,
@@ -904,7 +909,7 @@ const SVG = document.getElementById("S"),
 let centerX, centerY, hasTouch;
 
 function shade(m, f) {
-  M.innerHTML = m;
+  M.innerText = _(m);
   M.style.display = "block";
   M.onclick = function () {
     clearTimeout(id);
@@ -1061,7 +1066,7 @@ function say(a, f, cont) {
           a = document.createElement("a");
         a.href = "javascript:void(0)";
         a.onclick = option.action;
-        a.innerHTML = text;
+        a.innerText = _(text);
         li.appendChild(a);
         ol.appendChild(li);
       }
@@ -1069,7 +1074,7 @@ function say(a, f, cont) {
     BM.appendChild(ol);
     B.next = null;
   } else {
-    BM.innerHTML = what;
+    BM.innerText = _(what);
     B.talking = a.length > 0 || f != null ? 1 : 0;
     B.time = Date.now();
     B.next = function () {
@@ -1108,6 +1113,8 @@ function info(m) {
 }
 
 function setHotspot(e, m, f) {
+  if (m) m = _(m);
+
   if (hasTouch) {
     const children = e.children;
     for (let i = children.length; i--; ) {
