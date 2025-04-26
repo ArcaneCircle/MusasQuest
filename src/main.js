@@ -676,7 +676,7 @@ const items = {
       set(MusaBack, null, -26, 17, 0.5, 0);
       const takeArrow = function (a) {
         if (state.arrow) {
-          say([MusaBack, "I already have an arrow"]);
+          say([MusaBack, "I don't need more arrows"]);
         } else {
           addToInventory(a);
           state.arrow = 1;
