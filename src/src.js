@@ -1125,9 +1125,9 @@ function checkSaidBagdad() {
   }
 }
 
-window.onload = function () {
-  document.onclick = skip;
-  document.onkeyup = skip;
+function main() {
+  document.addEventListener("click", skip);
+  document.addEventListener("keyup", skip);
   // Prevent pinch/zoom on iOS 11.
   if ((hasTouch = "ontouchstart" in document)) {
     document.addEventListener(
@@ -1151,7 +1151,7 @@ window.onload = function () {
       },
       false,
     );
-    document.ontouchstart = document.ontouchmove = function (event) {
+    const onTouch = (event) => {
       const touches = event.touches;
       if (touches && touches.length > 0) {
         const t = touches[0],
@@ -1159,17 +1159,24 @@ window.onload = function () {
         info(e && e.hoverMessage ? e.hoverMessage : null);
       }
     };
-    document.ontouchend = document.ontouchcancel = info;
+    document.addEventListener("touchstart", onTouch);
+    document.addEventListener("touchmove", onTouch);
+    document.addEventListener("touchend", info);
+    document.addEventListener("touchcancel", info);
   } else {
-    document.onmousemove = info;
+    document.addEventListener("mousemove", info);
   }
-  window.onresize = resize;
+
   resize();
   checkSaidBagdad();
+
+  window.addEventListener("resize", resize);
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") {
       checkSaidBagdad();
     }
     localStorage.state = JSON.stringify(state);
   });
-};
+}
+
+main();
