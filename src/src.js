@@ -2,18 +2,61 @@ import "./main.css";
 
 const initialState = '{"scene": "Intro", "inventory": []}';
 let state = JSON.parse(localStorage.state || initialState);
-const items = {
-    Silk: Silk,
-    Helmet: Helmet,
-    TurbanRope: TurbanRope,
-    Sword: Sword,
-    Chains: Chains,
-    Carpet: Carpet,
-    A1: A1,
-    A2: A2,
-    A3: A3,
-    Grass: Grass,
-    Cross: Cross,
+const SVG = document.getElementById("S"),
+  Throne = document.getElementById("Throne"),
+  King = document.getElementById("King"),
+  MusaBack = document.getElementById("MusaBack"),
+  Bamidele = document.getElementById("Bamidele"),
+  HelmetOnBamidele = document.getElementById("HelmetOnBamidele"),
+  Market = document.getElementById("Market"),
+  Musa = document.getElementById("Musa"),
+  RedFruits = document.getElementById("RedFruits"),
+  YellowFruits = document.getElementById("YellowFruits"),
+  GreenFruits = document.getElementById("GreenFruits"),
+  Seer = document.getElementById("Seer"),
+  CampNight = document.getElementById("CampNight"),
+  Scorpion = document.getElementById("Scorpion"),
+  CampDay = document.getElementById("CampDay"),
+  Tent = document.getElementById("Tent"),
+  Robber = document.getElementById("Robber"),
+  BamideleDead = document.getElementById("BamideleDead"),
+  BamideleTurban = document.getElementById("BamideleTurban"),
+  MusaBound = document.getElementById("MusaBound"),
+  RobberDead = document.getElementById("RobberDead"),
+  ColumnDistant = document.getElementById("ColumnDistant"),
+  TempleEntry = document.getElementById("TempleEntry"),
+  Column = document.getElementById("Column"),
+  Temple = document.getElementById("Temple"),
+  TempleFront = document.getElementById("TempleFront"),
+  Lamp = document.getElementById("Lamp"),
+  Jinn = document.getElementById("Jinn"),
+  Bagdad = document.getElementById("Bagdad"),
+  Mongol = document.getElementById("Mongol"),
+  Byzantium = document.getElementById("Byzantium"),
+  Crusader = document.getElementById("Crusader"),
+  ByzantiumMarket = document.getElementById("ByzantiumMarket"),
+  M1 = document.getElementById("M1"),
+  M2 = document.getElementById("M2"),
+  M3 = document.getElementById("M3"),
+  OutOfTown = document.getElementById("OutOfTown"),
+  Enter = document.getElementById("Enter"),
+  M = document.getElementById("M"),
+  B = document.getElementById("B"),
+  BM = document.getElementById("BM"),
+  I = document.getElementById("I"),
+  BP = document.getElementById("BP"),
+  items = {
+    Silk: document.getElementById("Silk"),
+    Helmet: document.getElementById("Helmet"),
+    TurbanRope: document.getElementById("TurbanRope"),
+    Sword: document.getElementById("Sword"),
+    Chains: document.getElementById("Chains"),
+    Carpet: document.getElementById("Carpet"),
+    A1: document.getElementById("A1"),
+    A2: document.getElementById("A2"),
+    A3: document.getElementById("A3"),
+    Grass: document.getElementById("Grass"),
+    Cross: document.getElementById("Cross"),
   },
   itemUse = {
     Helmet: function () {
@@ -408,7 +451,7 @@ const items = {
       set(BamideleDead, null, -5, 25, 0.5, 0, "Dead Bamidele");
       set(BamideleTurban, null, -25, 16, 0.5, 0, "Dead Bamidele");
       set(MusaBound, null, 36, 14, 0.5, 0);
-      set(Chains, null, 36, 24, 0.13, 0);
+      set(items["Chains"], null, 36, 24, 0.13, 0);
       if (!state.morning) {
         state.morning = 1;
         say([
@@ -444,7 +487,7 @@ const items = {
       }
       set(RobberDead, null, -50, 14, 0.4, 0, "Dead robber");
       set(
-        Helmet,
+        items["Helmet"],
         function () {
           say([currentMusa(), "Won't touch the thing!"]);
         },
@@ -456,7 +499,7 @@ const items = {
       );
       if (!state.inventory.includes("Sword")) {
         set(
-          Sword,
+          items["Sword"],
           function () {
             addToInventory("Sword");
           },
@@ -471,7 +514,7 @@ const items = {
         set(Musa, null, 36, 14, 0.5, 0);
         if (!state.inventory.includes("Chains")) {
           set(
-            Chains,
+            items["Chains"],
             function () {
               addToInventory("Chains");
             },
@@ -484,7 +527,7 @@ const items = {
         }
       } else {
         set(MusaBound, null, 36, 13, 0.5, 0);
-        set(Chains, null, 36, 23, 0.13, 0);
+        set(items["Chains"], null, 36, 23, 0.13, 0);
       }
       set(
         ColumnDistant,
@@ -622,7 +665,7 @@ const items = {
         "A golden lamp",
       );
       set(
-        Carpet,
+        items["Carpet"],
         function () {
           addToInventory("Carpet");
           say([Musa, "Got a carpet, need a house!"]);
@@ -683,13 +726,37 @@ const items = {
         }
       };
       if (state.arrow !== "A1") {
-        set(A1, () => takeArrow("A1"), 20, 18, 0.2, -35, "Broken Arrow");
+        set(
+          items["A1"],
+          () => takeArrow("A1"),
+          20,
+          18,
+          0.2,
+          -35,
+          "Broken Arrow",
+        );
       }
       if (state.arrow !== "A2") {
-        set(A2, () => takeArrow("A2"), -5, 32, 0.2, -55, "Broken Arrow");
+        set(
+          items["A2"],
+          () => takeArrow("A2"),
+          -5,
+          32,
+          0.2,
+          -55,
+          "Broken Arrow",
+        );
       }
       if (state.arrow !== "A3") {
-        set(A3, () => takeArrow("A3"), 40, 28, 0.2, -15, "Broken Arrow");
+        set(
+          items["A3"],
+          () => takeArrow("A3"),
+          40,
+          28,
+          0.2,
+          -15,
+          "Broken Arrow",
+        );
       }
     },
     Byzantium: function () {
@@ -729,7 +796,7 @@ const items = {
         !state.inventory.includes("Cross")
       ) {
         set(
-          Grass,
+          items["Grass"],
           function () {
             addToInventory("Grass");
           },
@@ -871,7 +938,7 @@ function newZone(size) {
 
 function removeZone(e) {
   if (e.zone) {
-    S.removeChild(e.zone);
+    SVG.removeChild(e.zone);
     e.zone = null;
   }
 }
@@ -883,7 +950,7 @@ function addZone(e, size) {
     }
     e.zone = newZone(1 / size);
     e.zone.size = size;
-    S.appendChild(e.zone);
+    SVG.appendChild(e.zone);
   }
   const z = e.zone;
   z.style.transformOrigin = e.style.transformOrigin;
@@ -1086,7 +1153,7 @@ function show(name) {
   console.log(`Scene: ${name}`);
   info();
   clear();
-  for (const e of S.getElementsByTagName("g")) {
+  for (const e of SVG.getElementsByTagName("g")) {
     e.style.visibility = "hidden";
     e.onclick = null;
     removeZone(e);
@@ -1107,7 +1174,7 @@ function resize() {
   centerX = stageWidth >> 1;
   centerY = stageHeight >> 1;
 
-  const style = S.style;
+  const style = SVG.style;
   style.width = stageWidth + "px";
   style.height = stageHeight + "px";
   style.transformOrigin = "top left";
