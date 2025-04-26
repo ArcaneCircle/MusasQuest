@@ -724,7 +724,7 @@ const items = {
           say([Crusader, "Not so fast!"]);
         }
       });
-      if (!state.inventory.includes("Grass")) {
+      if (!state.inventory.includes("Grass") && !state.inventory.includes("Cross")) {
         set(
           Grass,
           function () {
