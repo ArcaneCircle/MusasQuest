@@ -140,7 +140,7 @@ const SVG = document.getElementById("S"),
               },
             },
             {
-              text: () => _("Home"),
+              text: () => "Home",
               action: () => {
                 if (state.inventory.includes("Silk")) {
                   fly("Home");
