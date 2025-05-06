@@ -47,6 +47,7 @@ const SVG = document.getElementById("S"),
   BM = document.getElementById("BM"),
   I = document.getElementById("I"),
   BP = document.getElementById("BP"),
+  CURSOR = document.getElementById("cursor"),
   items = {
     Silk: document.getElementById("Silk"),
     Helmet: document.getElementById("Helmet"),
@@ -1073,6 +1074,8 @@ function say(a, f, cont) {
     });
     BM.appendChild(ol);
     B.next = null;
+    // do not show cursor for choices
+    CURSOR.style.display = "none";
   } else {
     BM.innerText = _(what);
     B.talking = a.length > 0 || f != null ? 1 : 0;
@@ -1087,7 +1090,7 @@ function say(a, f, cont) {
         f && f();
       }
     };
-    B.tid = setTimeout(B.next, 1000 + 200 * what.split(" ").length);
+    CURSOR.style.display = "block";
   }
   const whoRect = who.getBoundingClientRect(),
     whoRectHalfWidth = (whoRect.width / 2) | 0,
@@ -1187,6 +1190,8 @@ function resize() {
   style.transformOrigin = "top left";
   style.transform = `scale(${ratio})`;
   style.display = "block";
+
+  CURSOR.style.transform = `scale(${ratio / 4})`;
 
   show(state.scene);
 }

@@ -59,3 +59,19 @@ a {
   top: 0;
   padding: 45vh 0 0;
 }
+#cursor {
+  animation: MoveUpDown 1.3s linear infinite;
+  position: absolute;
+  display: inline-block;
+  padding-left: 2px;
+  right: -5px;
+}
+@keyframes MoveUpDown {
+  0%,
+  100% {
+    bottom: 10%;
+  }
+  50% {
+    bottom: 30%;
+  }
+}
